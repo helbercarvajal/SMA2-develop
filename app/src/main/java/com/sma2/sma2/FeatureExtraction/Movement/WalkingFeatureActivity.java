@@ -1,7 +1,6 @@
 package com.sma2.sma2.FeatureExtraction.Movement;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -10,9 +9,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.GridLabelRenderer;
-import com.jjoe64.graphview.series.BarGraphSeries;
-import com.jjoe64.graphview.series.DataPoint;
 import com.sma2.sma2.DataAccess.SignalDA;
 import com.sma2.sma2.DataAccess.SignalDataService;
 import com.sma2.sma2.FeatureExtraction.GetExercises;
@@ -23,9 +19,8 @@ import com.sma2.sma2.R;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-public class BalanceTremorFeatureActivity extends AppCompatActivity implements View.OnClickListener {
+public class WalkingFeatureActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button bBack;
     private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/MOVEMENT/";
@@ -36,7 +31,7 @@ public class BalanceTremorFeatureActivity extends AppCompatActivity implements V
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_balance_feature_);
+        setContentView(R.layout.activity_walking_feature_);
         bBack=findViewById(R.id.button_back6);
         bBack.setOnClickListener(this);
         tTremor=findViewById(R.id.tTremorBalance);
@@ -66,7 +61,7 @@ public class BalanceTremorFeatureActivity extends AppCompatActivity implements V
 
         }
 
-        if(path_movement==null){
+        if(path_movement == null){
             tTremor.setText(R.string.Empty);
         }
         else {
@@ -117,7 +112,7 @@ public class BalanceTremorFeatureActivity extends AppCompatActivity implements V
     }
 
     private void onButtonBack(){
-        Intent i =new Intent(BalanceTremorFeatureActivity.this, MainActivityMenu.class);
+        Intent i =new Intent(WalkingFeatureActivity.this, MainActivityMenu.class);
         startActivity(i);
 
     }

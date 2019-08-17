@@ -32,7 +32,7 @@
         android:layout_marginEnd="8sp"
         android:layout_marginStart="8sp"
         android:gravity="center"
-        android:text="@string/balance"
+        android:text="@string/walking"
         android:textSize="@dimen/textview_text_size"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"

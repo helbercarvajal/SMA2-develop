@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 
 
 import com.sma2.sma2.FeatureExtraction.Movement.BalanceTremorFeatureActivity;
+import com.sma2.sma2.FeatureExtraction.Movement.WalkingFeatureActivity;
 import com.sma2.sma2.FeatureExtraction.Movement.HandMovementFeatureActivity;
 import com.sma2.sma2.FeatureExtraction.Movement.PosturalTremor_feature_Activity;
 import com.sma2.sma2.FeatureExtraction.Speech.Speech_features_Activity;
@@ -80,7 +81,7 @@ public class ResultsActivity extends AppCompatActivity implements View.OnClickLi
                 break;
 
             case R.id.bWalking:
-                onButtonClicked_bBalance();
+                onButtonClicked_bWalking();
                 break;
 
             case R.id.button_back3:
@@ -111,13 +112,16 @@ public class ResultsActivity extends AppCompatActivity implements View.OnClickLi
         startActivity(i);
     }
 
+    private void onButtonClicked_bWalking() {
+        Intent i =new Intent(ResultsActivity.this, WalkingFeatureActivity.class);
+        startActivity(i);
+    }
 
     private void onButtonClicked_handMovement(int IDright, int IDleft){
         Intent i =new Intent(ResultsActivity.this, HandMovementFeatureActivity.class);
         i.putExtra("IDright", IDright);
         i.putExtra("IDleft", IDleft);
         startActivity(i);
-
     }
 
     private void onButtonBack(){
