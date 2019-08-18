@@ -65,8 +65,6 @@ public class PhonFeatures_Activity extends AppCompatActivity  implements View.On
 
         tmessage_phonation=findViewById(R.id.tmessage_phonation);
         tmessage_shimmer=findViewById(R.id.tmessage_shimmer);
-
-
         iEmojinPhonation=findViewById(R.id.iEmojin_phonation);
         iEmojinShimmer=findViewById(R.id.iEmojin_shimmer);
 
