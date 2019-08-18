@@ -147,7 +147,7 @@
     <string name="daily_exercises">Daily Exercises</string>
     <string name="full_exercises">Full Exercises</string>
     <string name="wrong_pass">Wrong password</string>
-
-
+    <string name="gaitGyroscope">Gait signal - Gyroscope</string>
+    <string name="gaitAccelerometer">Gait signal - Accelerometer</string>
 
 </resources>

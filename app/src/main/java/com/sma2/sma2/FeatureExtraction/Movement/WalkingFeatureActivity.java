@@ -25,36 +25,36 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
     Button bBack;
     private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/MOVEMENT/";
     String path_movement = null;
-    List<String> path_movement_all= new ArrayList<>();
-    TextView tTremor;
-
+    List<String> path_movement_all = new ArrayList<>();
+    TextView tWalking;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walking_feature_);
-        bBack=findViewById(R.id.button_back6);
+        bBack = findViewById(R.id.button_back6);
         bBack.setOnClickListener(this);
-        tTremor=findViewById(R.id.tTremorBalance);
-        SignalDataService signalDataService =new SignalDataService(this);
-        CSVFileReader FileReader=new CSVFileReader(this);
+        tWalking = findViewById(R.id.tTremorWalking);
+        SignalDataService signalDataService = new SignalDataService(this);
+        CSVFileReader FileReader = new CSVFileReader(this);
         MovementProcessing MovementProcessor=new MovementProcessing();
         DecimalFormat df = new DecimalFormat("#.0");
 
-        int IDEx=22;
-        GetExercises GetEx=new GetExercises(this);
-        String name=GetEx.getNameExercise(IDEx);
-        double Tremor=0;
-        List<SignalDA> Signals=signalDataService.getSignalsbyname(name);
-        if (Signals.size()>0){
-            path_movement=PATH+Signals.get(Signals.size()-1).getSignalPath();
+        int IDEx = 31;   // Gait 4x10
+        GetExercises GetEx = new GetExercises(this);
 
-            if (Signals.size()>4){
+        String name = GetEx.getNameExercise(IDEx);
+        double Tremor = 0;
+        List<SignalDA> Signals = signalDataService.getSignalsbyname(name);
+        if (Signals.size()>0){
+            path_movement = PATH + Signals.get(Signals.size()-1).getSignalPath();
+
+            if (Signals.size() > 4){
                 for (int i=Signals.size()-4;i<Signals.size();i++){
                     path_movement_all.add(PATH+Signals.get(i).getSignalPath());
                 }
             }
             else{
-                for (int i=0;i<Signals.size();i++){
+                for (int i = 0; i < Signals.size(); i++){
                     path_movement_all.add(PATH+Signals.get(i).getSignalPath());
                 }
             }
@@ -62,22 +62,24 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
         }
 
         if(path_movement == null){
-            tTremor.setText(R.string.Empty);
+            tWalking.setText(R.string.Empty);
         }
         else {
             CSVFileReader.Signal TremorSignalaX = FileReader.ReadMovementSignal(path_movement, "aX [m/s^2]");
             CSVFileReader.Signal TremorSignalaY = FileReader.ReadMovementSignal(path_movement, "aY [m/s^2]");
             CSVFileReader.Signal TremorSignalaZ = FileReader.ReadMovementSignal(path_movement, "aZ [m/s^2]");
             Tremor = MovementProcessor.ComputeTremor(TremorSignalaX.Signal, TremorSignalaY.Signal, TremorSignalaZ.Signal);
-            tTremor.setText(String.valueOf(df.format(Tremor)));
+            tWalking.setText(String.valueOf(df.format(Tremor)));
+            System.out.println(TremorSignalaX.Signal.size());
         }
 
         GraphManager graphManager = new GraphManager(this);
-        ArrayList<Integer> x=new ArrayList<>();
-        ArrayList<Float> y=new ArrayList<>();
-        for (int i=0;i<5;i++){
+        ArrayList<Integer> x = new ArrayList<>();
+        ArrayList<Float> y = new ArrayList<>();
 
-            if (i<path_movement_all.size()){
+        for (int i = 0; i < 5; i++){
+
+            if (i < path_movement_all.size()){
                 CSVFileReader.Signal TremorSignalaX2 = FileReader.ReadMovementSignal(path_movement_all.get(i), "aX [m/s^2]");
                 CSVFileReader.Signal TremorSignalaY2 = FileReader.ReadMovementSignal(path_movement_all.get(i), "aY [m/s^2]");
                 CSVFileReader.Signal TremorSignalaZ2 = FileReader.ReadMovementSignal(path_movement_all.get(i), "aZ [m/s^2]");
@@ -89,17 +91,31 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
                 x.add(i+1);
                 y.add((float) 0);
             }
-
         }
-        String Title=getResources().getString(R.string.TremorAmplitude);
-        String Ylabel=getResources().getString(R.string.TremorAmplitude);
-        String Xlabel=getResources().getString(R.string.session);
-        GraphView graph =findViewById(R.id.bar_TremorBalance);
+
+        String Title = getResources().getString(R.string.TremorAmplitude);
+        String Ylabel = getResources().getString(R.string.TremorAmplitude);
+        String Xlabel = getResources().getString(R.string.session);
+        GraphView graph = findViewById(R.id.bar_TremorGait);
         graphManager.BarGraph(graph, x, y, 0, 5, Title, Xlabel, Ylabel);
 
+        // Plot accelerometer gait signal
+        GraphView graph2 = findViewById(R.id.plotWalkingAccelerometer);
+        Title = getResources().getString(R.string.F0);
+        Xlabel = getResources().getString(R.string.time);
+        //Ylabel = getResources().getString(R.string.frequency);
+        Ylabel = "acceleration [g]";
+        graphManager.LineGraph(graph2, x, y, 0, 10, Title, Xlabel, Ylabel);
 
+
+        // Plot of gyroscope gait signal
+        GraphView graph3 = findViewById(R.id.plotWalkingGyroscope);
+        Title = getResources().getString(R.string.F0);
+        Xlabel = getResources().getString(R.string.time);
+        //Ylabel = getResources().getString(R.string.frequency);
+        Ylabel = "degrees";
+        graphManager.LineGraph(graph3, x, y, 0, 10, Title, Xlabel, Ylabel);
     }
-
 
     @Override
     public void onClick(View view) {
@@ -116,6 +132,5 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
         startActivity(i);
 
     }
-
 
 }
