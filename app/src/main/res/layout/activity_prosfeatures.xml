@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:layout_gravity="center"
+    >
+
+
+
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        tools:context="com.sma2.sma2.MainActivity">
+
+        <TextView
+            android:id="@+id/prosody"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:gravity="center"
+            android:text="@string/prosody"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/ddk_reg2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.6"
+            app:layout_constraintDimensionRatio="5"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:text="@string/voiceRate"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/prosody" />
+
+
+        <TextView
+            android:id="@+id/tddk_reg2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.3"
+            app:layout_constraintDimensionRatio="3"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:lines="1"
+            android:text=""
+            android:gravity="end"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintLeft_toRightOf="@+id/ddk_reg2"
+            app:layout_constraintTop_toBottomOf="@+id/prosody" />
+
+
+        <ImageView
+            android:id="@+id/iEmojin_prosody"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_marginTop="35sp"
+            android:layout_gravity="center"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ddk_reg2"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tmessage_prosody"
+            android:layout_marginTop="35sp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_gravity="center"
+            android:textSize="22sp"
+            android:text=""
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iEmojin_prosody"
+            />
+
+
+
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/bar_perc_prosody"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.95"
+            app:layout_constraintDimensionRatio="1.9"
+            app:seriesType="bar"
+            app:seriesColor="@color/colorPrimaryDark"
+            android:title="@string/voiceRate"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_prosody"/>
+
+        <TextView
+            android:id="@+id/ddk_reg3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.6"
+            app:layout_constraintDimensionRatio="5"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:text="@string/MaxEnergy"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bar_perc_prosody" />
+
+
+        <TextView
+            android:id="@+id/tddk_reg3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.3"
+            app:layout_constraintDimensionRatio="3"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:lines="1"
+            android:text=""
+            android:gravity="end"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintLeft_toRightOf="@+id/ddk_reg2"
+            app:layout_constraintTop_toBottomOf="@+id/bar_perc_prosody" />
+
+
+        <ImageView
+            android:id="@+id/iEmojin_prosody2"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_marginTop="35sp"
+            android:layout_gravity="center"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ddk_reg3"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tmessage_prosody2"
+            android:layout_marginTop="35sp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_gravity="center"
+            android:textSize="22sp"
+            android:text=""
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iEmojin_prosody2"
+            />
+
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/bar_perc_prosody2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.95"
+            app:layout_constraintDimensionRatio="1.9"
+            app:seriesType="bar"
+            app:seriesColor="@color/colorPrimaryDark"
+            android:title="@string/voiceRate"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_prosody2"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/back"
+            android:layout_marginTop="8sp"
+            android:textSize="@dimen/button_text_size"
+            android:background="@color/colorPrimaryDark"
+            android:id="@+id/button_back_speech_ft"
+            app:layout_constraintTop_toBottomOf="@+id/bar_perc_prosody2"/>
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>
+
+

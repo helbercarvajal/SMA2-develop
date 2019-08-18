@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:layout_gravity="center"
+    >
+
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        tools:context="com.sma2.sma2.MainActivity">
+
+
+        <TextView
+            android:id="@+id/phonation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:gravity="center"
+            android:text="@string/phonation"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_marginTop="5sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phonation"
+            />
+
+        <TextView
+            android:id="@+id/jitterA"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.45"
+            app:layout_constraintDimensionRatio="5"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:text="@string/jitterA"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phonation" />
+
+        <TextView
+            android:id="@+id/tjitterA"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.45"
+            app:layout_constraintDimensionRatio="5"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:lines="1"
+            android:text=""
+            android:gravity="end"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintLeft_toRightOf="@+id/jitterA"
+            app:layout_constraintTop_toBottomOf="@+id/phonation" />
+
+        <TextView
+            android:id="@+id/jitterI"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.45"
+            app:layout_constraintDimensionRatio="5"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:text="@string/jitterI"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/jitterA" />
+
+        <TextView
+            android:id="@+id/tjitterI"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.45"
+            app:layout_constraintDimensionRatio="5"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:lines="1"
+            android:text=""
+            android:gravity="end"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintLeft_toRightOf="@+id/jitterI"
+            app:layout_constraintTop_toBottomOf="@+id/tjitterA" />
+
+
+        <TextView
+            android:id="@+id/jitterU"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.45"
+            app:layout_constraintDimensionRatio="5"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:text="@string/jitterU"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/jitterI" />
+
+        <TextView
+            android:id="@+id/tjitterU"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.45"
+            app:layout_constraintDimensionRatio="5"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:lines="1"
+            android:text=""
+            android:gravity="end"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintLeft_toRightOf="@+id/jitterU"
+            app:layout_constraintTop_toBottomOf="@+id/tjitterI" />
+
+
+        <ImageView
+            android:id="@+id/iEmojin_phonation"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="35dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/jitterU" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tmessage_phonation"
+            android:layout_marginTop="35sp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_gravity="center"
+            android:textSize="22sp"
+            android:text=""
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iEmojin_phonation"
+            />
+
+
+        <TextView
+            android:id="@+id/color1"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="8sp"
+            android:background="#996300"
+            app:layout_constraintEnd_toStartOf="@+id/vowelA"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_phonation" />
+
+        <TextView
+            android:id="@+id/vowelA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:text="A"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintEnd_toStartOf="@+id/color2"
+            app:layout_constraintStart_toEndOf="@+id/color1"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_phonation" />
+
+        <TextView
+            android:id="@+id/color2"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
+            android:background="#FFBE00"
+            app:layout_constraintEnd_toStartOf="@+id/vowelI"
+            app:layout_constraintStart_toEndOf="@+id/vowelA"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_phonation" />
+
+        <TextView
+            android:id="@+id/vowelI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:text="I"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintEnd_toStartOf="@+id/color3"
+            app:layout_constraintStart_toEndOf="@+id/color2"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_phonation" />
+
+        <TextView
+            android:id="@+id/color3"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
+            android:background="#FF8C00"
+            app:layout_constraintEnd_toStartOf="@+id/vowelU"
+            app:layout_constraintStart_toEndOf="@+id/vowelI"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_phonation" />
+
+        <TextView
+            android:id="@+id/vowelU"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8sp"
+            android:text="U"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/color3"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_phonation" />
+
+
+
+
+
+
+
+
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/bar_perc_phonation"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="6dp"
+            android:title="@string/jitter"
+            app:layout_constraintDimensionRatio="1.9"
+            app:layout_constraintHorizontal_bias="0.473"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vowelA"
+            app:layout_constraintWidth_percent="0.95"
+            app:seriesColor="@color/colorPrimaryDark"
+            app:seriesType="bar" />
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_marginTop="5sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bar_perc_phonation"
+            />
+
+
+        <TextView
+            android:id="@+id/ShimmerA"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.45"
+            app:layout_constraintDimensionRatio="5"
+            android:layout_marginTop="15sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:text="@string/shimmerA"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bar_perc_phonation" />
+
+        <TextView
+            android:id="@+id/tshimmerA"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.45"
+            app:layout_constraintDimensionRatio="5"
+            android:layout_marginTop="15sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:lines="1"
+            android:text=""
+            android:gravity="end"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintLeft_toRightOf="@+id/ShimmerA"
+            app:layout_constraintTop_toBottomOf="@+id/bar_perc_phonation" />
+
+
+        <TextView
+            android:id="@+id/ShimmerI"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.45"
+            app:layout_constraintDimensionRatio="5"
+            android:layout_marginTop="15sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:text="@string/shimmerI"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ShimmerA" />
+
+        <TextView
+            android:id="@+id/tshimmerI"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.45"
+            app:layout_constraintDimensionRatio="5"
+            android:layout_marginTop="15sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:lines="1"
+            android:text=""
+            android:gravity="end"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintLeft_toRightOf="@+id/ShimmerI"
+            app:layout_constraintTop_toBottomOf="@+id/tshimmerA" />
+
+
+        <TextView
+            android:id="@+id/ShimmerU"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.45"
+            app:layout_constraintDimensionRatio="5"
+            android:layout_marginTop="15sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:text="@string/shimmerU"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ShimmerI" />
+
+        <TextView
+            android:id="@+id/tshimmerU"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.45"
+            app:layout_constraintDimensionRatio="5"
+            android:layout_marginTop="15sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:lines="1"
+            android:text=""
+            android:gravity="end"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintLeft_toRightOf="@+id/ShimmerU"
+            app:layout_constraintTop_toBottomOf="@+id/tshimmerI" />
+
+
+
+
+
+
+
+
+
+        <ImageView
+            android:id="@+id/iEmojin_shimmer"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_marginTop="35sp"
+            android:layout_gravity="center"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ShimmerU"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tmessage_shimmer"
+            android:layout_marginTop="35sp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_gravity="center"
+            android:textSize="22sp"
+            android:text=""
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iEmojin_shimmer"
+            />
+
+
+        <TextView
+            android:id="@+id/color1_S"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="8sp"
+            android:background="#996300"
+            app:layout_constraintEnd_toStartOf="@+id/vowelA_S"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_shimmer" />
+
+        <TextView
+            android:id="@+id/vowelA_S"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:text="A"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintEnd_toStartOf="@+id/color2_S"
+            app:layout_constraintStart_toEndOf="@+id/color1_S"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_shimmer" />
+
+        <TextView
+            android:id="@+id/color2_S"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
+            android:background="#FFBE00"
+            app:layout_constraintEnd_toStartOf="@+id/vowelI_S"
+            app:layout_constraintStart_toEndOf="@+id/vowelA_S"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_shimmer" />
+
+        <TextView
+            android:id="@+id/vowelI_S"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:text="I"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintEnd_toStartOf="@+id/color3_S"
+            app:layout_constraintStart_toEndOf="@+id/color2_S"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_shimmer" />
+
+        <TextView
+            android:id="@+id/color3_S"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
+            android:background="#FF8C00"
+            app:layout_constraintEnd_toStartOf="@+id/vowelU_S"
+            app:layout_constraintStart_toEndOf="@+id/vowelI_S"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_shimmer" />
+
+        <TextView
+            android:id="@+id/vowelU_S"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8sp"
+            android:text="U"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/color3_S"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_shimmer" />
+
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/bar_perc_shimmer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="6dp"
+            app:layout_constraintWidth_percent="0.95"
+            app:layout_constraintDimensionRatio="1.9"
+            app:seriesType="bar"
+            app:seriesColor="@color/colorPrimaryDark"
+            android:title="@string/shimmer"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vowelA_S"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/back"
+            android:layout_marginTop="8sp"
+            android:textSize="@dimen/button_text_size"
+            android:background="@color/colorPrimaryDark"
+            android:id="@+id/button_back_speech_Phon"
+            app:layout_constraintTop_toBottomOf="@+id/bar_perc_shimmer"/>
+
+
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>
+
