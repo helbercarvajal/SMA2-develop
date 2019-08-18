@@ -139,6 +139,7 @@
     <string name="pronation">Hand Rotation</string>
     <string name="kinetic">Kinetic Tremor</string>
     <string name="circling">Circling</string>
+    <string name="walking">Walking</string>
     <string name="perc_left_hand">Performance Left Hand</string>
     <string name="perc_right_hand">Performance Right Hand</string>
     <string name="scheduler">Change exercise scheduler</string>
@@ -146,7 +147,7 @@
     <string name="daily_exercises">Daily Exercises</string>
     <string name="full_exercises">Full Exercises</string>
     <string name="wrong_pass">Wrong password</string>
-
-
+    <string name="gaitGyroscope">Gait signal - Gyroscope</string>
+    <string name="gaitAccelerometer">Gait signal - Accelerometer</string>
 
 </resources>

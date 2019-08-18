@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 
 
 import com.sma2.sma2.FeatureExtraction.Movement.BalanceTremorFeatureActivity;
+import com.sma2.sma2.FeatureExtraction.Movement.WalkingFeatureActivity;
 import com.sma2.sma2.FeatureExtraction.Movement.HandMovementFeatureActivity;
 import com.sma2.sma2.FeatureExtraction.Movement.PosturalTremor_feature_Activity;
 import com.sma2.sma2.FeatureExtraction.Speech.Speech_features_Activity;
@@ -16,7 +17,7 @@ import com.sma2.sma2.FeatureExtraction.Tapping.Tapping_feature_Activity;
 
 
 public class ResultsActivity extends AppCompatActivity implements View.OnClickListener {
-    ImageButton bTapping_one, bPosturalTremor, bSpeech, bBalance, bRotation, bKinetic, bCircling;
+    ImageButton bTapping_one, bPosturalTremor, bSpeech, bBalance, bRotation, bKinetic, bCircling, bWalking;
     Button bBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class ResultsActivity extends AppCompatActivity implements View.OnClickLi
         bRotation=findViewById(R.id.bRotation);
         bKinetic=findViewById(R.id.bKinetic);
         bCircling=findViewById(R.id.bCircling);
+        bWalking=findViewById(R.id.bWalking);
         setListeners();
     }
 
@@ -43,6 +45,7 @@ public class ResultsActivity extends AppCompatActivity implements View.OnClickLi
         bRotation.setOnClickListener(this);
         bKinetic.setOnClickListener(this);
         bCircling.setOnClickListener(this);
+        bWalking.setOnClickListener(this);
     }
 
     @Override
@@ -77,6 +80,10 @@ public class ResultsActivity extends AppCompatActivity implements View.OnClickLi
                 onButtonClicked_handMovement(IDright, IDleft);
                 break;
 
+            case R.id.bWalking:
+                onButtonClicked_bWalking();
+                break;
+
             case R.id.button_back3:
                 onButtonBack();
                 break;
@@ -105,13 +112,16 @@ public class ResultsActivity extends AppCompatActivity implements View.OnClickLi
         startActivity(i);
     }
 
+    private void onButtonClicked_bWalking() {
+        Intent i =new Intent(ResultsActivity.this, WalkingFeatureActivity.class);
+        startActivity(i);
+    }
 
     private void onButtonClicked_handMovement(int IDright, int IDleft){
         Intent i =new Intent(ResultsActivity.this, HandMovementFeatureActivity.class);
         i.putExtra("IDright", IDright);
         i.putExtra("IDleft", IDleft);
         startActivity(i);
-
     }
 
     private void onButtonBack(){

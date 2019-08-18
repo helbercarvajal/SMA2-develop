@@ -45,8 +45,6 @@ public class BalanceTremorFeatureActivity extends AppCompatActivity implements V
         MovementProcessing MovementProcessor=new MovementProcessing();
         DecimalFormat df = new DecimalFormat("#.0");
 
-
-
         int IDEx=22;
         GetExercises GetEx=new GetExercises(this);
         String name=GetEx.getNameExercise(IDEx);
@@ -68,7 +66,6 @@ public class BalanceTremorFeatureActivity extends AppCompatActivity implements V
 
         }
 
-
         if(path_movement==null){
             tTremor.setText(R.string.Empty);
         }
@@ -80,10 +77,7 @@ public class BalanceTremorFeatureActivity extends AppCompatActivity implements V
             tTremor.setText(String.valueOf(df.format(Tremor)));
         }
 
-
-
-
-        GraphManager graphManager=new GraphManager(this);
+        GraphManager graphManager = new GraphManager(this);
         ArrayList<Integer> x=new ArrayList<>();
         ArrayList<Float> y=new ArrayList<>();
         for (int i=0;i<5;i++){
@@ -127,9 +121,6 @@ public class BalanceTremorFeatureActivity extends AppCompatActivity implements V
         startActivity(i);
 
     }
-
-
-
 
 
 }
