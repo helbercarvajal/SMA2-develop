@@ -142,6 +142,8 @@
     <string name="daily_exercises">Ejercicios Diarios</string>
     <string name="full_exercises">Todos los ejercicios</string>
     <string name="wrong_pass">Contraseña incorrecta</string>
+    <string name="energyVariability" translatable="false">Varibilidad de la energía (%) </string>
+    <string name="MaxEnergy" translatable="false">Energía Máxima (%) </string>
 
 
 </resources>

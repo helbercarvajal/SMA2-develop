@@ -9,6 +9,7 @@ import static java.util.Arrays.copyOfRange;
 /**
  * Created by TOMAS on 18/02/2017.
  * Modified on 08/10/2018  for SMA2 - Tomas
+ * * Modified on 08/10/2018  for SMA2 - Paula Pérez
  *
  * This file includes the following pre-processing procedures:
  * - Signal normalization (method: normsig).
@@ -173,6 +174,91 @@ public class sigproc {
             end_frame = end_frame + windowshift;
         }
         return frames;
+    }
+    //Calculate difference between elements of array
+    public float[] diff(float[] x)
+    {
+        float[] diffV = new float[x.length-1];
+        for (int i=0;i< (x.length-1);i++)
+        {
+            diffV[i] = x[i+1]-x[i];
+        }
+        return diffV;
+    }
+
+    //Absolute value of array elements
+    public float[] absArr(float[] x)
+    {
+        float[] y = new float[x.length];
+        for(int i=0;i<x.length;i++)
+        {
+            y[i]=Math.abs(x[i]);
+        }
+        return y;
+    }
+    //Find indices in array with condition opt
+    public List find(float[] x,float val,int opt)
+    {
+        List<Integer> res = new ArrayList<>();
+        switch (opt)
+        {
+            //Less than
+            case 0: {
+                for (int i = 0; i < x.length;i++) {
+                    if (x[i] < val) {
+                        res.add(i);
+                    }
+                }
+                break;
+            }
+            //Less or equal than
+            case 1:{
+                for (int i = 0; i < x.length;i++) {
+                    if (x[i] <= val) {
+                        res.add(i);
+                    }
+                }
+                break;
+            }
+            //Greater than
+            case 2:{
+                for (int i = 0; i < x.length;i++) {
+                    if (x[i] > val) {
+                        res.add(i);
+                    }
+                }
+                break;
+            }
+            //Greater or equal than
+            case 3:{
+                for (int i = 0; i < x.length;i++) {
+                    if (x[i] >= val) {
+                        res.add(i);
+                    }
+                }
+                break;
+            }
+            //Equal to
+            case 4:{
+                for (int i = 0; i < x.length;i++) {
+                    if (x[i] == val) {
+                        res.add(i);
+                    }
+                }
+                break;
+            }
+            //Different than
+            case 5:{
+                for (int i = 0; i < x.length;i++) {
+                    if (x[i] != val) {
+                        res.add(i);
+                    }
+                }
+                break;
+            }
+
+        }
+        return res;
     }
 
 }

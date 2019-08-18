@@ -1,5 +1,9 @@
 package com.sma2.sma2.FeatureExtraction.Speech.features;
 
+/**
+
+ * * * Modified on 17/08/2019  for SMA2 - Paula Pérez
+ */
 
 
 import com.sma2.sma2.FeatureExtraction.Speech.tools.array_manipulation;
@@ -22,12 +26,19 @@ public class Energy {
         List<float[]> segments = tools.sigframe(signal, fs,0.04f, 0.02f);
         float[] energy_contour = new float[segments.size()];
         for(int i = 0; i < segments.size(); i++){
-            powered_array = operations.absArr(segments.get(i)); // Change to operations.powerArray if it is necessary
-            window_energy = operations.sumArray(powered_array)/powered_array.length;
-            energy_contour[i] = (float) Math.log(window_energy);
+            powered_array = operations.powerArray(segments.get(i)); // Change to operations.powerArray if it is necessary
+
+            //powered_array = operations.absArr(segments.get(i)); // Change to operations.powerArray if it is necessary
+            window_energy = operations.sumArray(operations.absArr(powered_array))/powered_array.length;
+            energy_contour[i] = 10*(float) Math.log10(window_energy);
         }
         return energy_contour;
     }
+
+
+
+
+
 
     public float perturbationEnergy(float[] energy_contour) {
         //Length of the energy contour

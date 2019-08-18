@@ -113,9 +113,21 @@
     <string name="keep">Keep doing your best </string>
     <string name="phonation">Phonation </string>
     <string name="jitter" translatable="false">Jitter (%) </string>
+    <string name="shimmer">Shimmer (%)</string>
     <string name="articulation">Articulation </string>
     <string name="ddk_reg">DDK regularity (ms)</string>
     <string name="Speech">Speech</string>
+    <string name="voiceRate" translatable="false">Voice Rate (%) </string>
+    <string name="MaxEnergy" translatable="false">Max Energy (%) </string>
+    <string name="energyVariability" translatable="false">Energy Variability (%) </string>
+    <string name="jitterA" translatable="false">Jitter A (%) </string>
+    <string name="jitterI" translatable="false">Jitter I (%) </string>
+    <string name="jitterU" translatable="false">Jitter U (%)</string>
+    <string name="shimmerA" translatable="false">Shimmer A (%) </string>
+    <string name="shimmerI" translatable="false">Shimmer I (%) </string>
+    <string name="shimmerU" translatable="false">Shimmer U (%) </string>
+    <string name="prosody">Prosody </string>
+    <string name="SpeechFT">Speech Features</string>
     <string name="movement">Movement</string>
     <string name="postural">Postural Tremor</string>
     <string name="Hand_left">Left Hand</string>

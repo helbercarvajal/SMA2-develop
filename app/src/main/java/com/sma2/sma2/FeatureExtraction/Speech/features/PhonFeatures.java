@@ -2,6 +2,8 @@ package com.sma2.sma2.FeatureExtraction.Speech.features;
 
 
 
+import android.util.Log;
+
 import com.sma2.sma2.FeatureExtraction.Speech.tools.TransitionDectector;
 import com.sma2.sma2.FeatureExtraction.Speech.tools.array_manipulation;
 
@@ -28,6 +30,7 @@ public class PhonFeatures {
         }
         f0 = newF0;
 
+
         //Length of the f0 contour
         int N = f0.length;
         //Find Max
@@ -36,13 +39,65 @@ public class PhonFeatures {
         float Mp = temp[temp.length - 1];//Maximum pitch
         //Array with variations between elements of array
         float jitt = 0f;
+
         for (int i = 0; i < N; i=i+3)//Jitter is computed every 3 f0 periods
         {
             jitt+= abs(f0[i] - Mp);
+            Log.d("idato",String.valueOf(jitt));
+
         }
         jitt = (100*jitt)/(N*Mp);
         return jitt;
     }
+
+
+
+
+    public float shimmer(float[] f0, List<float[]> Amp) {
+        //Ensure nonzero values in f0 contour
+        List lf0 = ArrM.find(f0,0f,2);
+
+        //extract the frames with f0 other than 0
+        List<float[]> newAmp = new ArrayList<>();
+        int aux = 0;
+        for(int i=0;i<lf0.size();i++)
+        {
+            aux = (int) lf0.get(i);
+            newAmp.add(Amp.get(aux));
+        }
+        Amp = newAmp;
+
+        //Calculate maximum values ​​of each frame
+        float[] Ak = new float[Amp.size()];
+        for(int i=0;i<Amp.size();i++){
+            float[] temp = Amp.get(i);
+            Arrays.sort(temp);
+            float max = temp[temp.length-1];
+            max = Math.abs(max);
+            float min = temp[0];
+            min = Math.abs(min);
+            if (max<min)
+                max = min;
+            Ak[i] = max;
+        }
+
+        //Length of the f0 contour
+        int N = Ak.length;
+        //Find Max
+        float[] temp = Arrays.copyOfRange(Ak,0, Ak.length);
+        Arrays.sort(temp);
+        float Ma = temp[temp.length - 1];//Maximum amplitude
+        //Array with variations between elements of array
+        float shimm = 0f;
+        for (int i = 0; i < N; i=i+3)//Shimmer is computed every 3 f0 periods
+        {
+            shimm+= abs(Ak[i] - Ma);
+        }
+        shimm = (100*shimm)/(N*Ma);
+        return shimm;
+    }
+
+
 
     public float fluency_cal(float[] f0) {
         TransitionDectector transitionDectector = new TransitionDectector();
@@ -80,5 +135,7 @@ public class PhonFeatures {
 
         return (float) Math.sqrt(standardDeviation/length);
     }
+
+
 
 }

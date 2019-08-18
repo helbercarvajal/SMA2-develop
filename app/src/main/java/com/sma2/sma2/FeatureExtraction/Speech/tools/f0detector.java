@@ -1,6 +1,8 @@
 package com.sma2.sma2.FeatureExtraction.Speech.tools;
 
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,12 +11,14 @@ import static java.util.Arrays.copyOfRange;
 
 /**
  * Created by TOMAS on 26/03/2017.
+ * * * Modified on 08/10/2018  for SMA2 - Paula Pérez
  */
 
 public class f0detector {
     private float winlen;
     private float winstep;
     private int fs;
+    int ii=0;
     private sigproc SG = new sigproc();
     private array_manipulation ArrM = new array_manipulation();
     private FFT fft;
@@ -39,6 +43,8 @@ public class f0detector {
         //This function normalize the speech signal.
         winlen = (float) 0.04;//Default window length 40ms
         winstep = (float) 0.03;//Default window step 30ms;
+
+
         fs = Fs;
         inilag = (int) Math.ceil(fs/maxf0);//lower bound lag
         endlag = (int) Math.ceil(fs/minf0);//upper bound lag
@@ -379,7 +385,7 @@ public class f0detector {
                 if ((cont[i] != 0) && (cont[i + 1] == 0)) {
                     posfin = i;
                     int diff = Math.abs(posfin - posIni)+1;
-                    int minseg = 4;//Minimum number of windows considered as unvoiced
+                    int minseg = 2;//Minimum number of windows considered as unvoiced
                     if (diff < minseg) {//If f0=0 in a non-unvoiced nor silence segment, then interpolate.
                         for (int j = 0; j <= diff; j++) {
                             cont[posIni + j] = 0;
@@ -431,7 +437,55 @@ public class f0detector {
      * @param sigN Normalized speech signal (DC=0, Amplitude from -1 to +1)
      * @return List with the voiced segments
      * */
+
+
     public List<float[]> voiced(float[] f0,float[] sigN)
+    {
+        int minseg = (int) Math.ceil(winlen * fs);
+
+
+        int step = Math.round(winstep*fs);
+        List<float[]> VoicedSeg = new ArrayList<float[]>();
+        //sigproc SG = new sigproc();
+        List pitchON = SG.find(f0,0f,5);//Find different than 0
+
+
+        //List to array
+        float[] f0ON = new float[pitchON.size()];
+        for(int i=0;i<pitchON.size();i++)
+        {
+            int ind = (int) pitchON.get(i);
+            f0ON[i] =  ind;
+        }
+        //Initial position of segment
+
+        if (!pitchON.isEmpty()) {
+            int iniV = (int) pitchON.get(0) * step + step;
+            //Detect segments
+            float[] df0 = SG.diff(f0ON);
+            List sizeV = SG.find(df0, 1, 2);
+            for (int i = 0; i < sizeV.size(); i++) {
+                //int indx = sizV[i];
+                int indx = (int) sizeV.get(i);
+                int finV = (int) (pitchON.get(indx)) * step + step;
+                float[] seg = copyOfRange(sigN, iniV, finV);
+                iniV = (int) pitchON.get(indx + 1) * step + step;
+                //  if (seg.length>=minseg) {
+                VoicedSeg.add(seg);
+                //}
+            }
+            //Append last segment
+            int temp = pitchON.size();
+            int finV = (int) pitchON.get(temp - 1) * step + step;
+            float[] seg = copyOfRange(sigN, iniV, finV);
+            //if (seg.length>=minseg) {
+            VoicedSeg.add(seg);
+            //}
+        }
+        return VoicedSeg;
+    }
+
+    /*public List<float[]> voiced(float[] f0,float[] sigN)
     {
         int minseg = (int) Math.ceil(winlen * fs);
         int step = Math.round(winstep*fs);
@@ -469,7 +523,7 @@ public class f0detector {
             VoicedSeg.add(seg);
         //}
         return VoicedSeg;
-    }
+    }*/
     /***
      * Unvoiced speech signal
      * @param f0 pitch contourn (sig_f0)
