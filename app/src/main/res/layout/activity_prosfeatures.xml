@@ -21,13 +21,14 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginStart="8sp"
         tools:context="com.sma2.sma2.MainActivity">
 
         <TextView
             android:id="@+id/prosody"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15sp"
+            android:layout_marginTop="8sp"
             android:layout_marginEnd="8sp"
             android:layout_marginStart="8sp"
             android:gravity="center"
@@ -38,28 +39,41 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
+
         <TextView
-            android:id="@+id/ddk_reg2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_marginTop="5sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/prosody"
+            />
+
+
+        <TextView
+            android:id="@+id/vrateDDK1"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintWidth_percent="0.6"
+            app:layout_constraintWidth_percent="0.58"
             app:layout_constraintDimensionRatio="5"
             android:layout_marginTop="8sp"
             android:layout_marginEnd="8sp"
             android:layout_marginStart="8sp"
-            android:text="@string/voiceRate"
+            android:text="@string/voiceRateDDK1"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/textview_text_size"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/prosody" />
 
 
+
+
         <TextView
-            android:id="@+id/tddk_reg2"
+            android:id="@+id/tVrateDDK1"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintWidth_percent="0.3"
-            app:layout_constraintDimensionRatio="3"
+            app:layout_constraintWidth_percent="0.25"
+            app:layout_constraintDimensionRatio="5"
             android:layout_marginTop="8sp"
             android:layout_marginEnd="8sp"
             android:layout_marginStart="8sp"
@@ -67,8 +81,81 @@
             android:text=""
             android:gravity="end"
             android:textSize="@dimen/textview_text_size"
-            app:layout_constraintLeft_toRightOf="@+id/ddk_reg2"
+            app:layout_constraintLeft_toRightOf="@+id/vrateDDK1"
             app:layout_constraintTop_toBottomOf="@+id/prosody" />
+
+
+
+
+
+        <TextView
+            android:id="@+id/vrateDDK2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.58"
+            app:layout_constraintDimensionRatio="5"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:text="@string/voiceRateDDK2"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tVrateDDK1" />
+
+
+
+
+        <TextView
+            android:id="@+id/tVrateDDK2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.25"
+            app:layout_constraintDimensionRatio="5"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:lines="1"
+            android:text=""
+            android:gravity="end"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintLeft_toRightOf="@+id/vrateDDK2"
+            app:layout_constraintTop_toBottomOf="@+id/tVrateDDK1" />
+
+
+        <TextView
+            android:id="@+id/vrateDDK3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.58"
+            app:layout_constraintDimensionRatio="5"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:text="@string/voiceRateDDK3"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tVrateDDK2" />
+
+
+
+
+        <TextView
+            android:id="@+id/tVrateDDK3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.25"
+            app:layout_constraintDimensionRatio="5"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:lines="1"
+            android:text=""
+            android:gravity="end"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintLeft_toRightOf="@+id/vrateDDK3"
+            app:layout_constraintTop_toBottomOf="@+id/tVrateDDK2" />
 
 
         <ImageView
@@ -79,8 +166,9 @@
             android:layout_gravity="center"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ddk_reg2"
+            app:layout_constraintTop_toBottomOf="@+id/tVrateDDK3"
             />
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -97,30 +185,114 @@
             />
 
 
+        <TextView
+            android:id="@+id/color1"
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:layout_marginTop="16sp"
+            android:layout_marginStart="8sp"
+            android:background="#996300"
+            app:layout_constraintEnd_toStartOf="@+id/tDDK1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_prosody" />
+
+        <TextView
+            android:id="@+id/tDDK1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/DDK1"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintEnd_toStartOf="@+id/color2"
+            app:layout_constraintStart_toEndOf="@+id/color1"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_prosody" />
+
+        <TextView
+            android:id="@+id/color2"
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:layout_marginTop="16dp"
+            android:background="#FFBE00"
+            app:layout_constraintEnd_toStartOf="@+id/tDDK2"
+            app:layout_constraintStart_toEndOf="@+id/tDDK1"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_prosody" />
+
+        <TextView
+            android:id="@+id/tDDK2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/DDK2"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintEnd_toStartOf="@+id/color3"
+            app:layout_constraintStart_toEndOf="@+id/color2"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_prosody" />
+
+        <TextView
+            android:id="@+id/color3"
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:layout_marginTop="16dp"
+            android:background="#FF8C00"
+            app:layout_constraintEnd_toStartOf="@+id/tDDK3"
+            app:layout_constraintStart_toEndOf="@+id/tDDK2"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_prosody" />
+
+        <TextView
+            android:id="@+id/tDDK3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8sp"
+            android:text="@string/DDK3"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/color3"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_prosody" />
+
+
+
 
         <com.jjoe64.graphview.GraphView
             android:id="@+id/bar_perc_prosody"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="6dp"
             app:layout_constraintWidth_percent="0.95"
             app:layout_constraintDimensionRatio="1.9"
             app:seriesType="bar"
+            app:layout_constraintHorizontal_bias="0.473"
             app:seriesColor="@color/colorPrimaryDark"
             android:title="@string/voiceRate"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tmessage_prosody"/>
+            app:layout_constraintTop_toBottomOf="@+id/tDDK3"/>
+
 
         <TextView
-            android:id="@+id/ddk_reg3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_marginTop="5sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bar_perc_prosody"
+            />
+
+
+        <TextView
+            android:id="@+id/MEnergyDDK1"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintWidth_percent="0.6"
+
+            app:layout_constraintWidth_percent="0.62"
             app:layout_constraintDimensionRatio="5"
             android:layout_marginTop="8sp"
             android:layout_marginEnd="8sp"
             android:layout_marginStart="8sp"
-            android:text="@string/MaxEnergy"
+
+            android:text="@string/MaxEnergyDDK1"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/textview_text_size"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -128,11 +300,11 @@
 
 
         <TextView
-            android:id="@+id/tddk_reg3"
+            android:id="@+id/tMEnergyDDK1"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintWidth_percent="0.3"
-            app:layout_constraintDimensionRatio="3"
+            app:layout_constraintWidth_percent="0.25"
+            app:layout_constraintDimensionRatio="5"
             android:layout_marginTop="8sp"
             android:layout_marginEnd="8sp"
             android:layout_marginStart="8sp"
@@ -140,8 +312,84 @@
             android:text=""
             android:gravity="end"
             android:textSize="@dimen/textview_text_size"
-            app:layout_constraintLeft_toRightOf="@+id/ddk_reg2"
+            app:layout_constraintLeft_toRightOf="@+id/MEnergyDDK1"
             app:layout_constraintTop_toBottomOf="@+id/bar_perc_prosody" />
+
+
+
+        <TextView
+            android:id="@+id/MEnergyDDK2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            app:layout_constraintWidth_percent="0.62"
+            app:layout_constraintDimensionRatio="5"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+
+            android:text="@string/MaxEnergyDDK2"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tMEnergyDDK1" />
+
+
+        <TextView
+            android:id="@+id/tMEnergyDDK2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.25"
+            app:layout_constraintDimensionRatio="5"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:lines="1"
+            android:text=""
+            android:gravity="end"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintLeft_toRightOf="@+id/MEnergyDDK2"
+            app:layout_constraintTop_toBottomOf="@+id/tMEnergyDDK1" />
+
+        <TextView
+            android:id="@+id/MEnergyDDK3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            app:layout_constraintWidth_percent="0.62"
+            app:layout_constraintDimensionRatio="5"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+
+            android:text="@string/MaxEnergyDDK3"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tMEnergyDDK2" />
+
+
+        <TextView
+            android:id="@+id/tMEnergyDDK3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.25"
+            app:layout_constraintDimensionRatio="5"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:lines="1"
+            android:text=""
+            android:gravity="end"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintLeft_toRightOf="@+id/MEnergyDDK3"
+            app:layout_constraintTop_toBottomOf="@+id/tMEnergyDDK2" />
+
+
+
+
+
+
 
 
         <ImageView
@@ -152,7 +400,7 @@
             android:layout_gravity="center"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ddk_reg3"
+            app:layout_constraintTop_toBottomOf="@+id/MEnergyDDK3"
             />
 
         <TextView
@@ -169,6 +417,81 @@
             app:layout_constraintTop_toBottomOf="@+id/iEmojin_prosody2"
             />
 
+
+
+
+
+        <TextView
+            android:id="@+id/color1_S"
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="8sp"
+            android:background="#996300"
+            app:layout_constraintEnd_toStartOf="@+id/meDDK1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_prosody2" />
+
+        <TextView
+            android:id="@+id/meDDK1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/DDK1"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintEnd_toStartOf="@+id/color2_S"
+            app:layout_constraintStart_toEndOf="@+id/color1_S"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_prosody2" />
+
+        <TextView
+            android:id="@+id/color2_S"
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:layout_marginTop="16dp"
+            android:background="#FFBE00"
+            app:layout_constraintEnd_toStartOf="@+id/meDDK2"
+            app:layout_constraintStart_toEndOf="@+id/meDDK1"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_prosody2" />
+
+        <TextView
+            android:id="@+id/meDDK2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:text="@string/DDK2"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintEnd_toStartOf="@+id/color3_S"
+            app:layout_constraintStart_toEndOf="@+id/color2_S"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_prosody2" />
+
+        <TextView
+            android:id="@+id/color3_S"
+            android:layout_width="20sp"
+            android:layout_height="20sp"
+            android:layout_marginTop="16dp"
+            android:background="#FF8C00"
+            app:layout_constraintEnd_toStartOf="@+id/meDDK3"
+            app:layout_constraintStart_toEndOf="@+id/meDDK2"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_prosody2" />
+
+        <TextView
+            android:id="@+id/meDDK3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8sp"
+            android:text="@string/DDK3"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/color3_S"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_prosody2" />
+
+
+
+
+
         <com.jjoe64.graphview.GraphView
             android:id="@+id/bar_perc_prosody2"
             android:layout_width="0dp"
@@ -176,11 +499,12 @@
             app:layout_constraintWidth_percent="0.95"
             app:layout_constraintDimensionRatio="1.9"
             app:seriesType="bar"
+            android:layout_marginTop="6dp"
             app:seriesColor="@color/colorPrimaryDark"
             android:title="@string/voiceRate"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tmessage_prosody2"/>
+            app:layout_constraintTop_toBottomOf="@+id/meDDK1"/>
 
         <Button
             android:layout_width="match_parent"
