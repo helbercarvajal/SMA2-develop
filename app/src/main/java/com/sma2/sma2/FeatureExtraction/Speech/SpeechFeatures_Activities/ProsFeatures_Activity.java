@@ -2,6 +2,7 @@
 package com.sma2.sma2.FeatureExtraction.Speech.SpeechFeatures_Activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GridLabelRenderer;
+import com.jjoe64.graphview.ValueDependentColor;
+import com.jjoe64.graphview.helper.StaticLabelsFormatter;
+import com.jjoe64.graphview.series.BarGraphSeries;
+import com.jjoe64.graphview.series.DataPoint;
 import com.sma2.sma2.DataAccess.SignalDA;
 import com.sma2.sma2.DataAccess.SignalDataService;
 import com.sma2.sma2.FeatureExtraction.GetExercises;
@@ -32,11 +38,11 @@ import java.util.List;
 public class ProsFeatures_Activity extends AppCompatActivity implements View.OnClickListener {
 
 
-    private TextView tjitter, tmessage_phonation, tddk_reg, tddk_reg2, tddk_reg3, tmessage_articulation, tmessage_prosody, tmessage_prosody2;
-    private ImageView iEmojinPhonation, iEmojinArticulation, iEmojinProsody, iEmojinProsody2;
+    private TextView  tVrateDDK1,tVrateDDK2,tVrateDDK3,tMEnergyDDK1,tMEnergyDDK2,tMEnergyDDK3,  tmessage_prosody, tmessage_prosody2;
+    private ImageView  iEmojinProsody, iEmojinProsody2;
     private Button bBack;
-    private String path_pataka = null;
-    private List<String> path_pataka_all = new ArrayList<>();
+    private String path_pataka = null, path_pakata = null, path_petaka = null;
+    private List<String> path_pataka_all = new ArrayList<>(), path_pakata_all = new ArrayList<>(), path_petaka_all = new ArrayList<>();
     private float  voiceRate, maxEnergy;
 
     private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/AUDIO/";
@@ -48,20 +54,22 @@ public class ProsFeatures_Activity extends AppCompatActivity implements View.OnC
         bBack = findViewById(R.id.button_back_speech_ft);
 
 
-        tddk_reg2 = findViewById(R.id.tddk_reg2);
-        tddk_reg3 = findViewById(R.id.tddk_reg3);
+        tVrateDDK1 = findViewById(R.id.tVrateDDK1);
+        tMEnergyDDK1 = findViewById(R.id.tMEnergyDDK1);
+
+        tVrateDDK2 = findViewById(R.id.tVrateDDK2);
+        tMEnergyDDK2 = findViewById(R.id.tMEnergyDDK2);
 
 
-        tmessage_phonation = findViewById(R.id.tmessage_phonation);
-        tmessage_articulation = findViewById(R.id.tmessage_articulation);
+        tVrateDDK3 = findViewById(R.id.tVrateDDK3);
+        tMEnergyDDK3 = findViewById(R.id.tMEnergyDDK3);
+
+
         tmessage_prosody = findViewById(R.id.tmessage_prosody);
         tmessage_prosody2 = findViewById(R.id.tmessage_prosody2);
 
 
 
-
-        iEmojinPhonation = findViewById(R.id.iEmojin_phonation);
-        iEmojinArticulation = findViewById(R.id.iEmojin_articulation);
         iEmojinProsody = findViewById(R.id.iEmojin_prosody);
         iEmojinProsody2 = findViewById(R.id.iEmojin_prosody2);
 
@@ -160,6 +168,8 @@ public class ProsFeatures_Activity extends AppCompatActivity implements View.OnC
 
 
         int IDEx = 11;
+        String voiceRateStr="";
+        WAVfileReader wavFileReader = new WAVfileReader();
         array_manipulation ArrM = new array_manipulation();
 
         GetExercises GetEx = new GetExercises(this);
@@ -184,21 +194,113 @@ public class ProsFeatures_Activity extends AppCompatActivity implements View.OnC
             }
         }
 
+        // DDK2 PAKATA
+
+
+        IDEx = 13;
+        ArrM = new array_manipulation();
+
+        GetEx = new GetExercises(this);
+        name = GetEx.getNameExercise(IDEx);
+        signalDataService = new SignalDataService(this);
+        df = new DecimalFormat("#.00");
+        N = signalDataService.countSignalsbyname(name);
+
+        if (N > 0) {
+            List<SignalDA> signals = signalDataService.getSignalsbyname(name);
+            if (signals.size() > 0) {
+                path_pakata = signals.get(signals.size() - 1).getSignalPath();
+                if (signals.size() > 4) {
+                    for (int i = signals.size() - 4; i < signals.size(); i++) {
+                        path_pakata_all.add(signals.get(i).getSignalPath());
+                    }
+                } else {
+                    for (int i = 0; i < signals.size(); i++) {
+                        path_pakata_all.add(signals.get(i).getSignalPath());
+                    }
+                }
+            }
+        }
+
+
+
+
+        // DDK2 PETAKA
+
+
+        IDEx = 12;
+        ArrM = new array_manipulation();
+
+        GetEx = new GetExercises(this);
+        name = GetEx.getNameExercise(IDEx);
+        signalDataService = new SignalDataService(this);
+        df = new DecimalFormat("#.00");
+        N = signalDataService.countSignalsbyname(name);
+
+        if (N > 0) {
+            List<SignalDA> signals = signalDataService.getSignalsbyname(name);
+            if (signals.size() > 0) {
+                path_petaka = signals.get(signals.size() - 1).getSignalPath();
+                if (signals.size() > 4) {
+                    for (int i = signals.size() - 4; i < signals.size(); i++) {
+                        path_petaka_all.add(signals.get(i).getSignalPath());
+                    }
+                } else {
+                    for (int i = 0; i < signals.size(); i++) {
+                        path_petaka_all.add(signals.get(i).getSignalPath());
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
+        //DDK2: PAKATA
+
+            if (path_pakata == null) {
+                tVrateDDK2.setText(R.string.Empty);
+
+            } else {
+
+
+
+
+
+                voiceRate = VoiceRate(path_pakata);
+                voiceRateStr = String.valueOf(df.format(voiceRate)) + "%";
+                tVrateDDK2.setText(String.valueOf(voiceRateStr));}
+
+
+        //DDK3: PETAKA
+
+            if (path_petaka == null) {
+                tVrateDDK3.setText(R.string.Empty);
+
+            } else {
+
+
+                wavFileReader = new WAVfileReader();
+
+                voiceRate = VoiceRate(path_petaka);
+                voiceRateStr = String.valueOf(df.format(voiceRate)) + "%";
+                tVrateDDK3.setText(String.valueOf(voiceRateStr));}
+        //DDK1: PATAKA
 
         if (path_pataka == null) {
-            tddk_reg2.setText(R.string.Empty);
+            tVrateDDK1.setText(R.string.Empty);
 
         } else {
 
 
-            WAVfileReader wavFileReader = new WAVfileReader();
 
             voiceRate = VoiceRate(path_pataka);
-            String voiceRateStr = String.valueOf(df.format(voiceRate)) + "%";
-            tddk_reg2.setText(String.valueOf(voiceRateStr));
+            voiceRateStr = String.valueOf(df.format(voiceRate)) + "%";
+            tVrateDDK1.setText(String.valueOf(voiceRateStr));
 
-
-            // Emoji for phonation features
+            // Emoji for prosody features just for DDK1: PATAKA
 //78
             if (voiceRate >= 70) {
 
@@ -231,7 +333,11 @@ public class ProsFeatures_Activity extends AppCompatActivity implements View.OnC
             float VoiceRateTemp;
 
 
+
+
             GraphManager graphManager = new GraphManager(this);
+
+            ArrayList<Float> vRate_listDDK1=new ArrayList<>();
 
 
             ArrayList<Integer> x = new ArrayList<>();
@@ -240,30 +346,183 @@ public class ProsFeatures_Activity extends AppCompatActivity implements View.OnC
 
                 if (i < path_pataka_all.size()) {
                     VoiceRateTemp = VoiceRate(path_pataka_all.get(i));
-                    x.add(i + 1);
-                    y.add(VoiceRateTemp);
+                    vRate_listDDK1.add(VoiceRateTemp);
 
 
                 } else {
-                    x.add(i + 1);
-                    y.add((float) 0);
+                    vRate_listDDK1.add((float) 0);
                 }
 
             }
 
+
+
+
+
+
+
+            ArrayList<Float> vRate_listDDK2=new ArrayList<>();
+
+
+            for (int i = 0; i < 5; i++) {
+
+                if (i < path_pakata_all.size()) {
+                    VoiceRateTemp = VoiceRate(path_pakata_all.get(i));
+                    vRate_listDDK2.add(VoiceRateTemp);
+
+
+                } else {
+                    vRate_listDDK2.add((float) 0);
+                }
+
+            }
+
+            ArrayList<Float> vRate_listDDK3=new ArrayList<>();
+
+
+            for (int i = 0; i < 5; i++) {
+
+                if (i < path_petaka_all.size()) {
+                    VoiceRateTemp = VoiceRate(path_petaka_all.get(i));
+                    vRate_listDDK3.add(VoiceRateTemp);
+
+
+
+                } else {
+                    vRate_listDDK3.add((float) 0);
+
+                }
+
+            }
+
+
+
+
+
             String Title = getResources().getString(R.string.voiceRate);
             String Ylabel = getResources().getString(R.string.voiceRate);
             String Xlabel = getResources().getString(R.string.session);
-            GraphView graphPro = findViewById(R.id.bar_perc_prosody);
-            graphManager.BarGraph(graphPro, x, y, 100, 6.5, Title, Xlabel, Ylabel);
+            GraphView graph = findViewById(R.id.bar_perc_prosody);
+            //graphManager.BarGraph(graphPro, x, y, 100, 6.5, Title, Xlabel, Ylabel);
+
+
+
+                DataPoint[] dp = new DataPoint[]{
+                        new DataPoint(0,0),
+                        new DataPoint(1,vRate_listDDK1.get(0)),
+                        new DataPoint(2,vRate_listDDK2.get(0)),
+                        new DataPoint(3,vRate_listDDK3.get(0)),
+                        new DataPoint(4,0),
+                        new DataPoint(5,vRate_listDDK1.get(1)),
+                        new DataPoint(6,vRate_listDDK2.get(1)),
+                        new DataPoint(7,vRate_listDDK3.get(1)),
+                        new DataPoint(8,0),
+                        new DataPoint(9,vRate_listDDK1.get(2)),
+                        new DataPoint(10,vRate_listDDK2.get(2)),
+                        new DataPoint(11,vRate_listDDK3.get(2)),
+                        new DataPoint(12, 0),
+                };
+
+                float max_DDK1 = Math.max(vRate_listDDK1.get(0), Math.max(vRate_listDDK1.get(1), vRate_listDDK1.get(2)));
+                float max_DDK2 = Math.max(vRate_listDDK2.get(0), Math.max(vRate_listDDK2.get(1), vRate_listDDK2.get(2)));
+                float max_DDK3 = Math.max(vRate_listDDK3.get(0), Math.max(vRate_listDDK3.get(1), vRate_listDDK3.get(2)));
+
+                float max_all = Math.max(max_DDK1, Math.max(max_DDK2, max_DDK3));
+
+                int max_graph = Math.round(max_all + (float) 0.5);
+
+                BarGraphSeries<DataPoint> series = new BarGraphSeries<>(dp);
+                graph.addSeries(series);
+
+                GridLabelRenderer gridLabel = graph.getGridLabelRenderer();
+                gridLabel.setHorizontalAxisTitle(Xlabel);
+                gridLabel.setVerticalAxisTitle(Ylabel);
+                //graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
+
+                StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
+                staticLabelsFormatter.setHorizontalLabels(new String[] {" ","1", " ", "2", " ", "3", " "});
+                graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
+
+                graph.getViewport().setMinX(0);
+                graph.getViewport().setMaxX(12);
+                graph.getViewport().setMinY(0);
+                graph.getViewport().setMaxY(max_graph+1);
+
+                graph.getViewport().setXAxisBoundsManual(true);
+                graph.getViewport().setYAxisBoundsManual(true);
+
+                series.setSpacing(5);
+
+                series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
+                    @Override
+                    public int get(DataPoint data) {
+                        if((data.getX()==1) || (data.getX()==5) || (data.getX()==9))
+                            return (Color.rgb(153,99,0));
+                        else if((data.getX()==2) || (data.getX()==6) || (data.getX()==10))
+                            return (Color.rgb(255,190,0));
+                        else
+                            return (Color.rgb(255,140,0));
+                    }
+
+                });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
             //MAX ENERGY PART
+
+            //DDK2: PAKATA
+
+            if (path_pakata == null) {
+                tMEnergyDDK2.setText(R.string.Empty);
+
+            } else {
+
+
+                maxEnergy = MaxEnergy(path_pakata);
+                Log.e("FF1", "Max" + String.valueOf(maxEnergy));
+                String energyMStr = String.valueOf(df.format(maxEnergy)) + "%";
+                tMEnergyDDK2.setText(String.valueOf(energyMStr));}
+
+
+            //DDK3: PETAKA
+
+            if (path_petaka == null) {
+                tMEnergyDDK3.setText(R.string.Empty);
+
+            } else {
+
+
+                maxEnergy = MaxEnergy(path_petaka);
+                Log.e("FF1", "Max" + String.valueOf(maxEnergy));
+                String energyMStr = String.valueOf(df.format(maxEnergy)) + "%";
+                tMEnergyDDK3.setText(String.valueOf(energyMStr));}
+
+
             // get exercises from DDK: PATAKA to compute prosody features
 
 
             if (path_pataka == null) {
-                tddk_reg3.setText(R.string.Empty);
+                tMEnergyDDK1.setText(R.string.Empty);
 
             } else {
 
@@ -273,7 +532,7 @@ public class ProsFeatures_Activity extends AppCompatActivity implements View.OnC
                 maxEnergy = MaxEnergy(path_pataka);
                 Log.e("FF1", "Max" + String.valueOf(maxEnergy));
                 String energyMStr = String.valueOf(df.format(maxEnergy)) + "%";
-                tddk_reg3.setText(String.valueOf(energyMStr));
+                tMEnergyDDK1.setText(String.valueOf(energyMStr));
                 //Log.e("F0", String.valueOf(energyPerturbation));
 
                 // Emoji for prosody features
@@ -306,34 +565,157 @@ public class ProsFeatures_Activity extends AppCompatActivity implements View.OnC
                     tmessage_prosody2.startAnimation(animation2);
                 }
 
+
+
+
                 float EnergyMTemp;
 
 
                 graphManager = new GraphManager(this);
 
 
-                x = new ArrayList<>();
-                y = new ArrayList<>();
-                for (int i = 0; i < 5; i++) {
-
-                    if (i < path_pataka_all.size()) {
-                        EnergyMTemp = MaxEnergy(path_pataka_all.get(i));
-                        x.add(i + 1);
-                        y.add(EnergyMTemp);
-
-
-                    } else {
-                        x.add(i + 1);
-                        y.add((float) 0);
-                    }
-
-                }
 
                 Title = getResources().getString(R.string.MaxEnergy);
                 Ylabel = getResources().getString(R.string.MaxEnergy);
                 Xlabel = getResources().getString(R.string.session);
-                GraphView graphPro2 = findViewById(R.id.bar_perc_prosody2);
-                graphManager.BarGraph(graphPro2, x, y, 100, 6.5, Title, Xlabel, Ylabel);
+                graph = findViewById(R.id.bar_perc_prosody2);
+
+
+
+
+
+                ArrayList<Float> mEnergy_listDDK1=new ArrayList<>();
+
+
+                for (int i = 0; i < 5; i++) {
+
+                    if (i < path_pataka_all.size()) {
+                        EnergyMTemp = MaxEnergy(path_pataka_all.get(i));
+                        mEnergy_listDDK1.add(EnergyMTemp);
+
+
+                    } else {
+                        mEnergy_listDDK1.add((float) 0);
+                    }
+
+                }
+
+
+
+
+
+
+
+                ArrayList<Float> mEnergy_listDDK2=new ArrayList<>();
+
+
+                for (int i = 0; i < 5; i++) {
+
+                    if (i < path_pakata_all.size()) {
+                        EnergyMTemp = MaxEnergy(path_pakata_all.get(i));
+                        mEnergy_listDDK2.add(EnergyMTemp);
+
+
+                    } else {
+                        mEnergy_listDDK2.add((float) 0);
+                    }
+
+                }
+
+                ArrayList<Float> mEnergy_listDDK3=new ArrayList<>();
+
+
+                for (int i = 0; i < 5; i++) {
+
+                    if (i < path_petaka_all.size()) {
+                        EnergyMTemp = MaxEnergy(path_petaka_all.get(i));
+                        mEnergy_listDDK3.add(EnergyMTemp);
+
+
+
+                    } else {
+                        mEnergy_listDDK3.add((float) 0);
+
+                    }
+
+                }
+
+
+
+
+
+
+
+
+                dp = new DataPoint[]{
+                        new DataPoint(0,0),
+                        new DataPoint(1,mEnergy_listDDK1.get(0)),
+                        new DataPoint(2,mEnergy_listDDK2.get(0)),
+                        new DataPoint(3,mEnergy_listDDK3.get(0)),
+                        new DataPoint(4,0),
+                        new DataPoint(5,mEnergy_listDDK1.get(1)),
+                        new DataPoint(6,mEnergy_listDDK2.get(1)),
+                        new DataPoint(7,mEnergy_listDDK3.get(1)),
+                        new DataPoint(8,0),
+                        new DataPoint(9,mEnergy_listDDK1.get(2)),
+                        new DataPoint(10,mEnergy_listDDK2.get(2)),
+                        new DataPoint(11,mEnergy_listDDK3.get(2)),
+                        new DataPoint(12, 0),
+                };
+
+                max_DDK1 = Math.max(mEnergy_listDDK1.get(0), Math.max(mEnergy_listDDK1.get(1), mEnergy_listDDK1.get(2)));
+                max_DDK2 = Math.max(mEnergy_listDDK2.get(0), Math.max(mEnergy_listDDK2.get(1), mEnergy_listDDK2.get(2)));
+                max_DDK3 = Math.max(mEnergy_listDDK3.get(0), Math.max(mEnergy_listDDK3.get(1), mEnergy_listDDK3.get(2)));
+
+                max_all = Math.max(max_DDK1, Math.max(max_DDK2, max_DDK3));
+
+                max_graph = Math.round(max_all + (float) 0.5);
+
+                series = new BarGraphSeries<>(dp);
+                graph.addSeries(series);
+
+                gridLabel = graph.getGridLabelRenderer();
+                gridLabel.setHorizontalAxisTitle(Xlabel);
+                gridLabel.setVerticalAxisTitle(Ylabel);
+                //graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
+
+                staticLabelsFormatter = new StaticLabelsFormatter(graph);
+                staticLabelsFormatter.setHorizontalLabels(new String[] {" ","1", " ", "2", " ", "3", " "});
+                graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
+
+                graph.getViewport().setMinX(0);
+                graph.getViewport().setMaxX(12);
+                graph.getViewport().setMinY(0);
+                graph.getViewport().setMaxY(max_graph+1);
+
+                graph.getViewport().setXAxisBoundsManual(true);
+                graph.getViewport().setYAxisBoundsManual(true);
+
+                series.setSpacing(5);
+
+                series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
+                    @Override
+                    public int get(DataPoint data) {
+                        if((data.getX()==1) || (data.getX()==5) || (data.getX()==9))
+                            return (Color.rgb(153,99,0));
+                        else if((data.getX()==2) || (data.getX()==6) || (data.getX()==10))
+                            return (Color.rgb(255,190,0));
+                        else
+                            return (Color.rgb(255,140,0));
+                    }
+
+                });
+
+
+
+
+
+
+
+
+
+
+
 
 
             }

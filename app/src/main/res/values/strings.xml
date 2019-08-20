@@ -161,5 +161,14 @@
     <string name="wrong_pass">Wrong password</string>
     <string name="gaitGyroscope">Gait signal - Gyroscope</string>
     <string name="gaitAccelerometer">Gait signal - Accelerometer</string>
+    <string name="voiceRateDDK1">Voice Rate Pataka (%)</string>
+    <string name="voiceRateDDK2">Voice Rate Pakata (%)</string>
+    <string name="voiceRateDDK3">Voice Rate Petaka (%)</string>
+    <string name="MaxEnergyDDK1">Max Energy Pataka (%)</string>
+    <string name="MaxEnergyDDK2">Max Energy Pakata (%)</string>
+    <string name="MaxEnergyDDK3">Max Energy Petaka  (%)</string>
+    <string name="DDK1">Pataka</string>
+    <string name="DDK2">Pakata</string>
+    <string name="DDK3">Petaka</string>
 
 </resources>
