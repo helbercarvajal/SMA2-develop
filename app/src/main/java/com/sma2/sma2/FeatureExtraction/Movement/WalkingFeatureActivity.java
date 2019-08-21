@@ -1,5 +1,7 @@
 package com.sma2.sma2.FeatureExtraction.Movement;
 
+
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
