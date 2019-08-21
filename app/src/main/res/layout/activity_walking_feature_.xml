@@ -12,9 +12,7 @@
     android:paddingRight="0dp">
 
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
@@ -172,7 +170,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/button_back6"
+            app:layout_constraintBottom_toTopOf="@+id/chart2"
             app:layout_constraintDimensionRatio="1.6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.157"
@@ -183,6 +181,19 @@
             app:layout_constraintVertical_bias="0.0"
             app:layout_constraintWidth_percent="0.95" />
 
+        <com.github.mikephil.charting.charts.RadarChart
+            android:id="@+id/chart2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textSize="@dimen/button_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/button_back6"
+            app:layout_constraintDimensionRatio="0.78"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintWidth_percent="1"
+            app:seriesColor="@color/colorPrimaryDark"
+            app:seriesType="radarchart" />
 
         <Button
             android:id="@+id/button_back6"
