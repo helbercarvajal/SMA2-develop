@@ -170,5 +170,9 @@
     <string name="DDK1">Pataka</string>
     <string name="DDK2">Pakata</string>
     <string name="DDK3">Petaka</string>
+    <string name="tremor">Tremor</string>
+    <string name="stability"> Stability</string>
+    <string name="TremorLeft">% Left Hand</string>
+    <string name="TremorRight">% Right Hand</string>
 
 </resources>

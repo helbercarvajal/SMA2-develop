@@ -281,7 +281,7 @@ public class MovementProcessing {
                 if ((cont[i] != 0) && (cont[i + 1] == 0)) {
                     posfin = i;
                     int diff = Math.abs(posfin - posIni)+1;
-                    int minseg = 4;//Minimum number of windows considered as unvoiced
+                    int minseg = 2;//Minimum number of windows considered as unvoiced
                     if (diff < minseg) {//If f0=0 in a non-unvoiced nor silence segment, then interpolate.
                         for (int j = 0; j <= diff; j++) {
                             cont[posIni + j] = 0;

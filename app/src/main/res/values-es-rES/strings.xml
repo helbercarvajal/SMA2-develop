@@ -144,6 +144,10 @@
     <string name="wrong_pass">Contraseña incorrecta</string>
     <string name="energyVariability" translatable="false">Varibilidad de la energía (%) </string>
     <string name="MaxEnergy" translatable="false">Energía Máxima (%) </string>
+    <string name="tremor">Temblor</string>
+    <string name="stability"> Estabilidad</string>
+    <string name="TremorLeft">% Mano Izquierda</string>
+    <string name="TremorRight">% Mano Derecha</string>
 
 
 </resources>
