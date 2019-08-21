@@ -142,5 +142,9 @@
     <string name="daily_exercises">Daily Exercises</string>
     <string name="full_exercises">Full Exercises</string>
     <string name="wrong_pass">Wrong password</string>
+    <string name="tremor">Tremor</string>
+    <string name="stability"> Stability</string>
+    <string name="TremorLeft">% Left Hand</string>
+    <string name="TremorRight">% Right Hand</string>
 
 </resources>

@@ -51,110 +51,90 @@
         <TextView
             android:id="@+id/vrateDDK1"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintWidth_percent="0.58"
-            app:layout_constraintDimensionRatio="5"
-            android:layout_marginTop="8sp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginTop="15sp"
             android:layout_marginEnd="8sp"
             android:layout_marginStart="8sp"
+            android:gravity="center"
             android:text="@string/voiceRateDDK1"
-            android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/textview_text_size"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/prosody" />
 
-
-
-
         <TextView
             android:id="@+id/tVrateDDK1"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintWidth_percent="0.25"
-            app:layout_constraintDimensionRatio="5"
-            android:layout_marginTop="8sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15sp"
             android:layout_marginEnd="8sp"
             android:layout_marginStart="8sp"
             android:lines="1"
             android:text=""
             android:gravity="end"
             android:textSize="@dimen/textview_text_size"
-            app:layout_constraintLeft_toRightOf="@+id/vrateDDK1"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/prosody" />
-
-
-
-
 
         <TextView
             android:id="@+id/vrateDDK2"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintWidth_percent="0.58"
-            app:layout_constraintDimensionRatio="5"
-            android:layout_marginTop="8sp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginTop="15sp"
             android:layout_marginEnd="8sp"
             android:layout_marginStart="8sp"
+            android:gravity="center"
             android:text="@string/voiceRateDDK2"
-            android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/textview_text_size"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tVrateDDK1" />
-
-
-
+            app:layout_constraintTop_toBottomOf="@+id/vrateDDK1" />
 
         <TextView
             android:id="@+id/tVrateDDK2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintWidth_percent="0.25"
-            app:layout_constraintDimensionRatio="5"
-            android:layout_marginTop="8sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15sp"
             android:layout_marginEnd="8sp"
             android:layout_marginStart="8sp"
             android:lines="1"
             android:text=""
             android:gravity="end"
             android:textSize="@dimen/textview_text_size"
-            app:layout_constraintLeft_toRightOf="@+id/vrateDDK2"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tVrateDDK1" />
 
 
         <TextView
             android:id="@+id/vrateDDK3"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintWidth_percent="0.58"
-            app:layout_constraintDimensionRatio="5"
-            android:layout_marginTop="8sp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginTop="15sp"
             android:layout_marginEnd="8sp"
             android:layout_marginStart="8sp"
+            android:gravity="center"
             android:text="@string/voiceRateDDK3"
-            android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/textview_text_size"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tVrateDDK2" />
-
-
-
+            app:layout_constraintTop_toBottomOf="@+id/vrateDDK2" />
 
         <TextView
             android:id="@+id/tVrateDDK3"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintWidth_percent="0.25"
-            app:layout_constraintDimensionRatio="5"
-            android:layout_marginTop="8sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15sp"
             android:layout_marginEnd="8sp"
             android:layout_marginStart="8sp"
             android:lines="1"
             android:text=""
             android:gravity="end"
             android:textSize="@dimen/textview_text_size"
-            app:layout_constraintLeft_toRightOf="@+id/vrateDDK3"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tVrateDDK2" />
-
 
         <ImageView
             android:id="@+id/iEmojin_prosody"
@@ -279,38 +259,48 @@
             />
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <TextView
             android:id="@+id/MEnergyDDK1"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-
-            app:layout_constraintWidth_percent="0.62"
-            app:layout_constraintDimensionRatio="5"
-            android:layout_marginTop="8sp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginTop="15sp"
             android:layout_marginEnd="8sp"
             android:layout_marginStart="8sp"
-
+            android:gravity="center"
             android:text="@string/MaxEnergyDDK1"
-            android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/textview_text_size"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/bar_perc_prosody" />
 
 
         <TextView
             android:id="@+id/tMEnergyDDK1"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintWidth_percent="0.25"
-            app:layout_constraintDimensionRatio="5"
-            android:layout_marginTop="8sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15sp"
             android:layout_marginEnd="8sp"
             android:layout_marginStart="8sp"
             android:lines="1"
             android:text=""
             android:gravity="end"
             android:textSize="@dimen/textview_text_size"
-            app:layout_constraintLeft_toRightOf="@+id/MEnergyDDK1"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/bar_perc_prosody" />
 
 
@@ -318,76 +308,62 @@
         <TextView
             android:id="@+id/MEnergyDDK2"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-
-            app:layout_constraintWidth_percent="0.62"
-            app:layout_constraintDimensionRatio="5"
-            android:layout_marginTop="8sp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginTop="15sp"
             android:layout_marginEnd="8sp"
             android:layout_marginStart="8sp"
-
+            android:gravity="center"
             android:text="@string/MaxEnergyDDK2"
-            android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/textview_text_size"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tMEnergyDDK1" />
 
 
         <TextView
             android:id="@+id/tMEnergyDDK2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintWidth_percent="0.25"
-            app:layout_constraintDimensionRatio="5"
-            android:layout_marginTop="8sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15sp"
             android:layout_marginEnd="8sp"
             android:layout_marginStart="8sp"
             android:lines="1"
             android:text=""
             android:gravity="end"
             android:textSize="@dimen/textview_text_size"
-            app:layout_constraintLeft_toRightOf="@+id/MEnergyDDK2"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tMEnergyDDK1" />
 
         <TextView
             android:id="@+id/MEnergyDDK3"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-
-            app:layout_constraintWidth_percent="0.62"
-            app:layout_constraintDimensionRatio="5"
-            android:layout_marginTop="8sp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginTop="15sp"
             android:layout_marginEnd="8sp"
             android:layout_marginStart="8sp"
-
+            android:gravity="center"
             android:text="@string/MaxEnergyDDK3"
-            android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/textview_text_size"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tMEnergyDDK2" />
 
 
         <TextView
             android:id="@+id/tMEnergyDDK3"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintWidth_percent="0.25"
-            app:layout_constraintDimensionRatio="5"
-            android:layout_marginTop="8sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15sp"
             android:layout_marginEnd="8sp"
             android:layout_marginStart="8sp"
             android:lines="1"
             android:text=""
             android:gravity="end"
             android:textSize="@dimen/textview_text_size"
-            app:layout_constraintLeft_toRightOf="@+id/MEnergyDDK3"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tMEnergyDDK2" />
-
-
-
-
-
-
 
 
         <ImageView
