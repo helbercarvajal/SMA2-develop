@@ -18,6 +18,73 @@ public class PhonFeatures {
 
     public void phon_feats(){}
 
+
+
+    public float jitter(float[] f0) {
+        //Ensure nonzero values in f0 contour
+        List lf0 = ArrM.find(f0,0f,2);
+        //Convert list to float array
+        //List to array
+        float[] newF0 = new float[lf0.size()];
+        for(int i=0;i<lf0.size();i++)
+        {
+            newF0[i] = f0[(int)lf0.get(i)];
+        }
+        f0 = newF0;
+
+        float value_mean = (float) calculatemean(f0);
+        float value_std = (float) calculateSD(f0);
+
+        for(int i=0;i<f0.length;i++)
+        {
+            if (f0[i] > value_mean+(4*value_std))
+                f0[i]= value_mean;
+        }
+
+        //Length of the f0 contour
+        int N = f0.length;
+        //Find Max
+        float[] temp = Arrays.copyOfRange(f0,0, f0.length);
+        Arrays.sort(temp);
+        float Mp = temp[temp.length - 1];//Maximum pitch
+        //Array with variations between elements of array
+        float jitt = 0f;
+
+        for (int i = 0; i < N; i=i+3)//Jitter is computed every 3 f0 periods
+        {
+            jitt+= abs(f0[i] - Mp);
+            Log.d("idato",String.valueOf(jitt));
+
+        }
+        jitt = 3*(100*jitt)/(N*Mp);
+        return jitt;
+    }
+
+    public static double calculatemean(float[] m) {
+        float sum = 0;
+        for (int i = 0; i < m.length; i++) {
+            sum += m[i];
+        }
+        return sum / m.length;
+    }
+
+    public static double calculateSD(float[] numArray)
+    {
+        double sum = 0.0, standardDeviation = 0.0;
+        int length = numArray.length;
+        for(double num : numArray) {
+            sum += num;
+        }
+        double mean = sum/length;
+        for(double num: numArray) {
+            standardDeviation += Math.pow(num - mean, 2);
+        }
+        return Math.sqrt(standardDeviation/length);
+    }
+
+
+/*
+  //JITTER VIEJO, SIN EL CAMBIO
     public float jitter(float[] f0) {
         //Ensure nonzero values in f0 contour
         List lf0 = ArrM.find(f0,0f,2);
@@ -46,11 +113,11 @@ public class PhonFeatures {
             Log.d("idato",String.valueOf(jitt));
 
         }
-        jitt = (100*jitt)/(N*Mp);
+        jitt = 3*(100*jitt)/(N*Mp);
         return jitt;
     }
 
-
+*/
 
 
     public float shimmer(float[] f0, List<float[]> Amp) {

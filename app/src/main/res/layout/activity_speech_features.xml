@@ -125,14 +125,27 @@
     <Button
         android:layout_width="250sp"
         android:layout_height="wrap_content"
+        android:text="Diagrama radar"
+        android:layout_marginTop="10sp"
+        android:textSize="@dimen/button_text_size"
+        android:background="@color/colorPrimaryDark"
+        android:id="@+id/button_radar_speech"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtExercises"/>
+
+
+    <Button
+        android:layout_width="250sp"
+        android:layout_height="wrap_content"
         android:text="@string/back"
-        android:layout_marginTop="30sp"
+        android:layout_marginTop="10sp"
         android:textSize="@dimen/button_text_size"
         android:background="@color/colorPrimaryDark"
         android:id="@+id/button_back_speech"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtExercises"/>
+        app:layout_constraintTop_toBottomOf="@+id/button_radar_speech"/>
 
 
 

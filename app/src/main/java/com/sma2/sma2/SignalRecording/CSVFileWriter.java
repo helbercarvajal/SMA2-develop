@@ -25,7 +25,7 @@ public class CSVFileWriter {
     private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/MOVEMENT/";
     private static final String TAG = CSVFileWriter.class.getSimpleName();
     private String filename;
-    private BufferedWriter mBufferedWriter = null;
+    private BufferedWriter mBufferedWriter = null, mBufferedWriter2 = null;
 
 
 
@@ -90,6 +90,35 @@ public class CSVFileWriter {
         };
     }
 
+    public CSVFileWriter(String exerciseName, String path, boolean exercises) throws IOException {
+        String currTime = new SimpleDateFormat("yyyy-MM-dd_HH-mm", Locale.getDefault()).format(new Date());
+        if(exercises)
+            this.filename = exerciseName + FILE_ENDING;
+        else
+            this.filename = exerciseName + currTime + FILE_ENDING;
+
+        File file = openFile(path, this.filename);
+
+        try {
+            mBufferedWriter2 = new BufferedWriter(new FileWriter(file,true));
+        } catch (Exception e) {
+            Log.e(TAG, "ERROR opening file");
+            throw e;
+        }
+
+        HandlerThread ht = new HandlerThread("CSVFileWriterThread");
+        ht.start();
+        mHandler = new Handler(ht.getLooper()) {
+            public void handleMessage(Message msg) {
+                try {
+                    write((String[]) msg.obj);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    //TODO: handle exception
+                }
+            }
+        };
+    }
 
 
 
@@ -142,11 +171,37 @@ public class CSVFileWriter {
         }
     }
 
+    public void writeappend(String[] str) throws IOException {
+        String line = "";
+        for (int i = 0; i < str.length - 1; i++) {
+            line += str[i] + DELIMITER;
+        }
+        line += str[str.length - 1] + NEW_LINE;
+        try {
+            mBufferedWriter2.write(line);
+        } catch (Exception e) {
+            Log.e(TAG, "ERROR writing file");
+            throw e;
+        }
+    }
+
     public void close() throws IOException {
         try {
             mBufferedWriter.flush();
             mBufferedWriter.close();
             mBufferedWriter = null;
+        } catch (Exception e) {
+            Log.e(TAG, "ERROR on completing writer!");
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    public void closeappend() throws IOException {
+        try {
+            mBufferedWriter2.flush();
+            mBufferedWriter2.close();
+            mBufferedWriter2 = null;
         } catch (Exception e) {
             Log.e(TAG, "ERROR on completing writer!");
             e.printStackTrace();

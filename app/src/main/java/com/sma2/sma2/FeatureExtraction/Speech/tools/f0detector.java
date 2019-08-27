@@ -51,7 +51,11 @@ public class f0detector {
         //Get f0 contour from signal
         //Log.e("F0", "Inicia");
         //float[] pitchC = f0_cont(sig);
+
+
         float[] pitchC = f0_cont_fast(sig);
+        //float[] pitchC = f0_cristian(sig);
+
 
         //Log.e("F0", "Listo");
 
@@ -59,7 +63,40 @@ public class f0detector {
         pitchC = fixf0(pitchC);
 
         //Set pitch zero for windows less than the analysis window
-        pitchC = zerof0(pitchC);
+        pitchC = zerof0(pitchC,2);
+
+        //Interpolate missing values
+        pitchC = interpf0(pitchC);
+
+
+        //Voiced
+        //List VoicedSeg = voiced(pitchC,sig, (int) (winstep*fs));
+
+        return pitchC;
+    }
+
+
+    public float[] sig_f0_autocorrelate(float[] sig, int Fs) {
+        //This function normalize the speech signal.
+        winlen = (float) 0.04;//Default window length 40ms
+        winstep = (float) 0.03;//Default window step 30ms;
+
+
+        fs = Fs;
+        inilag = (int) Math.ceil(fs/maxf0);//lower bound lag
+        endlag = (int) Math.ceil(fs/minf0);//upper bound lag
+        //Get f0 contour from signal
+        //Log.e("F0", "Inicia");
+        //float[] pitchC = f0_cont(sig);
+
+        //float[] pitchC = f0_cont_fast(sig);
+        float[] pitchC = f0_autocorrelate(sig);
+
+        //Fix contour.
+        pitchC = fixf0(pitchC);
+
+        //Set pitch zero for windows less than the analysis window
+        pitchC = zerof0(pitchC,4);
 
         //Interpolate missing values
         pitchC = interpf0(pitchC);
@@ -79,7 +116,9 @@ public class f0detector {
         endlag = (int) Math.ceil(fs/minf0);//upper bound lag
         //Get f0 contour from signal
         //Log.e("F0", "Inicia");
+
         float[] pitchC = f0_cont(sig);
+
         //Log.e("F0", "Listo");
 
         //Fix contour.
@@ -92,6 +131,119 @@ public class f0detector {
         pitchC = interpf0(pitchC);
         return pitchC;
     }
+
+    private float[] f0_autocorrelate(float[] signal) {
+        //sigproc SigProc = new sigproc();
+        //signal = SG.normalizesig(signal);
+
+        //Find global absolute peak
+        float[] temp = Arrays.copyOfRange(signal, 0, signal.length - 1);
+        Arrays.sort(temp);
+        float GAP = temp[temp.length - 1];
+        GAP = Math.abs(GAP);//Global Absolute Peak
+        float GAP2 = temp[0];
+        GAP2 = Math.abs(GAP2);//in case the maximum is negative
+        if (GAP < GAP2) {
+            GAP = GAP2;
+        }
+
+        //Frame speech signal
+        int numberOfsamples = (int) Math.ceil(winlen * fs);
+        //Window step
+        int windowshift = (int) Math.ceil(winstep * fs);
+        int ini_frame = 0, end_frame = numberOfsamples;
+        //Number of frames to analyze
+        int numberOfframes;
+        if (windowshift == 0) { //if there is no window shift
+            numberOfframes = (int) (Math.floor(signal.length / numberOfsamples));
+            windowshift = numberOfframes;
+        } else {
+            float temp2 = winstep / winlen;
+            numberOfframes = (int) (Math.floor((signal.length / numberOfsamples) / temp2));
+        }
+        float sig_frame[] = copyOfRange(signal, ini_frame, end_frame);
+        //-----------------------------------------------------------------------------------------
+
+        float[] f0c = new float[numberOfframes];
+
+        for (int i = 0; i < numberOfframes; i++) {
+            sig_frame = copyOfRange(signal, ini_frame, end_frame);
+            //Voiceless candidate
+            temp = copyOfRange(sig_frame, 0, sig_frame.length);//it is necessary
+            Arrays.sort(temp);
+            float LAP = temp[temp.length - 1];//Local Absolute Peak
+            LAP = Math.abs(LAP);
+            float LAP2 = temp[0];
+            LAP2 = Math.abs(LAP2);//in case that the maximum is negative
+            if (LAP < LAP2) {
+                LAP = LAP2;
+            }
+
+            if (LAP < (silencetrehs * GAP)) {
+                f0c[i] = 0;
+            } else {
+                //Estimate pitch for each speech segment
+                f0c[i] = autoCorrelate(sig_frame, 16000);
+            }
+            ini_frame = ini_frame + windowshift;
+            end_frame = end_frame + windowshift;
+        }
+        return f0c;
+
+    }
+
+    private float autoCorrelate(float[] buf, float sampleRate) {
+        // Implements the ACF2+ algorithm
+        int SIZE = buf.length;
+        double rms = 0;
+        double val = 0;
+        for (int i = 0; i < SIZE; i++) {
+            val = buf[i];
+            rms += val * val;
+        }
+        rms = Math.sqrt(rms / SIZE);
+        if (rms < 0.01) // not enough signal
+            return 0;
+
+
+        int r1 = 0, r2 = SIZE - 1;
+        double thres = 0.2;
+        for (int i = 0; i < SIZE / 2; i++)
+            if (Math.abs(buf[i]) < thres) { r1 = i; break; }
+        for (int i = 1; i < SIZE / 2; i++)
+            if (Math.abs(buf[SIZE - i]) < thres) { r2 = SIZE - i; break; }
+
+        float [] buf_aux = copyOfRange(buf, r1, r2);
+        //buf = buf.slice(r1, r2);
+        SIZE = buf_aux.length;
+
+        float[] c = new float[SIZE];
+        for (int i = 0; i < SIZE; i++)
+            for (int j = 0; j < SIZE - i; j++)
+                c[i] = c[i] + buf_aux[j] * buf_aux[j + i];
+
+        int d = 0; while (c[d] > c[d + 1]) d++;
+        float maxval = -1;
+        int maxpos = -1;
+        for (int i = d; i < SIZE; i++) {
+            if (c[i] > maxval) {
+                maxval = c[i];
+                maxpos = i;
+            }
+        }
+        float T0 = maxpos;
+
+        float x1 = c[(int) T0 - 1], x2 = c[(int) T0], x3 = c[(int) T0 + 1];
+        float a = (x1 + x3 - 2 * x2) / 2;
+        float b = (x3 - x1) / 2;
+        if (a != 0)
+            T0 = T0 - b / (2 * a);
+
+        return sampleRate / T0;
+    }
+
+
+
 
     //Pitch contour
     public float[] f0_cont(float[] signal) {
@@ -385,7 +537,7 @@ public class f0detector {
                 if ((cont[i] != 0) && (cont[i + 1] == 0)) {
                     posfin = i;
                     int diff = Math.abs(posfin - posIni)+1;
-                    int minseg = 2;//Minimum number of windows considered as unvoiced
+                    int minseg = 4;//Minimum number of windows considered as unvoiced <---------- ACAAAAAAAAAAAAA
                     if (diff < minseg) {//If f0=0 in a non-unvoiced nor silence segment, then interpolate.
                         for (int j = 0; j <= diff; j++) {
                             cont[posIni + j] = 0;
@@ -397,6 +549,34 @@ public class f0detector {
         }
         return  cont;
     }
+
+    //Set f0 to zero in frames with a length less than the analysis window
+    public float[] zerof0(float[] cont, int min_windows) {
+        boolean initzero = false;
+        int posIni = 0;
+        int posfin;
+        for (int i = 1; i < cont.length-1; i++) {
+            if ((cont[i] != 0) && (cont[i - 1] == 0)) {
+                initzero = true;
+                posIni = i;
+            }
+            if (initzero) {
+                if ((cont[i] != 0) && (cont[i + 1] == 0)) {
+                    posfin = i;
+                    int diff = Math.abs(posfin - posIni)+1;
+                    int minseg = min_windows;//Minimum number of windows considered as unvoiced <---------- ACAAAAAAAAAAAAA
+                    if (diff < minseg) {//If f0=0 in a non-unvoiced nor silence segment, then interpolate.
+                        for (int j = 0; j <= diff; j++) {
+                            cont[posIni + j] = 0;
+                        }
+                        initzero = false;
+                    }
+                }
+            }
+        }
+        return  cont;
+    }
+
 
     //Interpolate missing f0
     //cont: f0cont
@@ -437,55 +617,7 @@ public class f0detector {
      * @param sigN Normalized speech signal (DC=0, Amplitude from -1 to +1)
      * @return List with the voiced segments
      * */
-
-
     public List<float[]> voiced(float[] f0,float[] sigN)
-    {
-        int minseg = (int) Math.ceil(winlen * fs);
-
-
-        int step = Math.round(winstep*fs);
-        List<float[]> VoicedSeg = new ArrayList<float[]>();
-        //sigproc SG = new sigproc();
-        List pitchON = SG.find(f0,0f,5);//Find different than 0
-
-
-        //List to array
-        float[] f0ON = new float[pitchON.size()];
-        for(int i=0;i<pitchON.size();i++)
-        {
-            int ind = (int) pitchON.get(i);
-            f0ON[i] =  ind;
-        }
-        //Initial position of segment
-
-        if (!pitchON.isEmpty()) {
-            int iniV = (int) pitchON.get(0) * step + step;
-            //Detect segments
-            float[] df0 = SG.diff(f0ON);
-            List sizeV = SG.find(df0, 1, 2);
-            for (int i = 0; i < sizeV.size(); i++) {
-                //int indx = sizV[i];
-                int indx = (int) sizeV.get(i);
-                int finV = (int) (pitchON.get(indx)) * step + step;
-                float[] seg = copyOfRange(sigN, iniV, finV);
-                iniV = (int) pitchON.get(indx + 1) * step + step;
-                //  if (seg.length>=minseg) {
-                VoicedSeg.add(seg);
-                //}
-            }
-            //Append last segment
-            int temp = pitchON.size();
-            int finV = (int) pitchON.get(temp - 1) * step + step;
-            float[] seg = copyOfRange(sigN, iniV, finV);
-            //if (seg.length>=minseg) {
-            VoicedSeg.add(seg);
-            //}
-        }
-        return VoicedSeg;
-    }
-
-    /*public List<float[]> voiced(float[] f0,float[] sigN)
     {
         int minseg = (int) Math.ceil(winlen * fs);
         int step = Math.round(winstep*fs);
@@ -511,8 +643,8 @@ public class f0detector {
             int finV = (int) (pitchON.get(indx))*step+step;
             float[] seg = copyOfRange(sigN,iniV,finV);
             iniV = (int) pitchON.get(indx+1)*step+step;
-          //  if (seg.length>=minseg) {
-                VoicedSeg.add(seg);
+            //  if (seg.length>=minseg) {
+            VoicedSeg.add(seg);
             //}
         }
         //Append last segment
@@ -520,10 +652,10 @@ public class f0detector {
         int finV = (int) pitchON.get(temp-1)*step+step;
         float[] seg = copyOfRange(sigN,iniV,finV);
         //if (seg.length>=minseg) {
-            VoicedSeg.add(seg);
+        VoicedSeg.add(seg);
         //}
         return VoicedSeg;
-    }*/
+    }
     /***
      * Unvoiced speech signal
      * @param f0 pitch contourn (sig_f0)
