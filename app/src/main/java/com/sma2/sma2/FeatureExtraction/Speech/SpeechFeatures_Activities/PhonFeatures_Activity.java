@@ -60,7 +60,6 @@ public class PhonFeatures_Activity extends AppCompatActivity  implements View.On
         setContentView(R.layout.activity_phonfeatures);
 
         bBack = findViewById(R.id.button_back_speech_Phon);
-
         tjitterA=findViewById(R.id.tjitterA);
         tjitterI=findViewById(R.id.tjitterI);
         tjitterU=findViewById(R.id.tjitterU);
