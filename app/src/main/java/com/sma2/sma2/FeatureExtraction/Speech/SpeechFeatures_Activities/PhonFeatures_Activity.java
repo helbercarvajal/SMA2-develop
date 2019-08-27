@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -22,13 +23,16 @@ import com.sma2.sma2.DataAccess.SignalDA;
 import com.sma2.sma2.DataAccess.SignalDataService;
 import com.sma2.sma2.FeatureExtraction.GetExercises;
 import com.sma2.sma2.FeatureExtraction.GraphManager;
+import com.sma2.sma2.FeatureExtraction.Movement.CSVFileReader;
 import com.sma2.sma2.FeatureExtraction.Speech.Speech_features_Activity;
 import com.sma2.sma2.FeatureExtraction.Speech.features.PhonFeatures;
 import com.sma2.sma2.FeatureExtraction.Speech.tools.WAVfileReader;
 import com.sma2.sma2.FeatureExtraction.Speech.tools.f0detector;
 import com.sma2.sma2.FeatureExtraction.Speech.tools.sigproc;
 import com.sma2.sma2.R;
+import com.sma2.sma2.SignalRecording.CSVFileWriter;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +41,7 @@ public class PhonFeatures_Activity extends AppCompatActivity  implements View.On
 
     private TextView tjitterA,tjitterI,tjitterU,tshimmerA,tshimmerI,tshimmerU,tmessage_phonation, tmessage_shimmer;
     private ImageView iEmojinPhonation, iEmojinShimmer;
+    private static final String TAG = CSVFileWriter.class.getSimpleName();
     private Button bBack;
     private String path_ah = null;
     private List<String> path_ah_all= new ArrayList<>();
@@ -65,8 +70,6 @@ public class PhonFeatures_Activity extends AppCompatActivity  implements View.On
 
         tmessage_phonation=findViewById(R.id.tmessage_phonation);
         tmessage_shimmer=findViewById(R.id.tmessage_shimmer);
-
-
         iEmojinPhonation=findViewById(R.id.iEmojin_phonation);
         iEmojinShimmer=findViewById(R.id.iEmojin_shimmer);
 
@@ -94,7 +97,6 @@ public class PhonFeatures_Activity extends AppCompatActivity  implements View.On
     private void onButtonBack() {
         Intent i = new Intent(PhonFeatures_Activity.this, Speech_features_Activity.class);
         startActivity(i);
-
     }
 
     private float Jitter(String AudioFile){
@@ -107,7 +109,7 @@ public class PhonFeatures_Activity extends AppCompatActivity  implements View.On
         //Normalize signal
         sigproc SigProc = new sigproc();
         SignalAh = SigProc.normsig(SignalAh);
-        float[] F0= F0Detector.sig_f0(SignalAh, InfoSig[1]);
+        float[] F0= F0Detector.sig_f0_autocorrelate(SignalAh, InfoSig[1]);
         return PhonFeatures.jitter(F0);
     }
 
@@ -121,7 +123,7 @@ public class PhonFeatures_Activity extends AppCompatActivity  implements View.On
         //Normalize signal
         sigproc SigProc = new sigproc();
         SignalAh = SigProc.normsig(SignalAh);
-        float[] F0= F0Detector.sig_f0(SignalAh, InfoSig[1]);
+        float[] F0= F0Detector.sig_f0_autocorrelate(SignalAh, InfoSig[1]);
 
         List<float[]> Amp = SigProc.sigframe(SignalAh, InfoSig[1],(float) 0.04,(float) 0.03);
 

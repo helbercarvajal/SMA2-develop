@@ -75,9 +75,6 @@ public class ProsFeatures {
     }
 
 
-
-
-
     private double calculateMean(float[] vector){
         double mean=0.0, std=0.0;
         int cont=0;
@@ -101,13 +98,9 @@ public class ProsFeatures {
                 std = std + ((vector[i] - mean) * (vector[i] - mean));
                 cont=cont+1;
             }
-
         }
         std=Math.sqrt(std/cont);
 
         return std;
     }
-
-
-
 }

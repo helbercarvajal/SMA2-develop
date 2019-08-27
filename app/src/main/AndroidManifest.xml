@@ -10,9 +10,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!-- permission required to automatically restart a repeating alarm if the user reboots the device -->
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- permission required to automatically restart a repeating alarm if the user reboots the device -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -21,7 +20,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
-
         <activity
             android:name=".Activities.SplashScreen"
             android:screenOrientation="portrait">
@@ -44,37 +42,53 @@
         <activity
             android:name=".ThanksActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".Profile1Activity"
+        <activity
+            android:name=".Profile1Activity"
             android:screenOrientation="portrait" />
-        <activity android:name=".Profile2Activity"
+        <activity
+            android:name=".Profile2Activity"
             android:screenOrientation="portrait" />
-        <activity android:name=".Profile3Activity"
+        <activity
+            android:name=".Profile3Activity"
             android:screenOrientation="portrait" />
         <activity android:name=".MainActivityMenu" />
-        <activity android:name=".ProfileActivity"
+        <activity
+            android:name=".ProfileActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".UpdateMedicine" />
         <activity android:name=".Modif_medicine" />
         <activity android:name=".ResultsActivity" />
-        <activity android:name=".ActivityChangeScheduler"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".FeatureExtraction.Tapping.Tapping_feature_Activity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".FeatureExtraction.Movement.PosturalTremor_feature_Activity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".FeatureExtraction.Movement.BalanceTremorFeatureActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".FeatureExtraction.Movement.WalkingFeatureActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".FeatureExtraction.Movement.HandMovementFeatureActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".FeatureExtraction.Speech.Speech_features_Activity"
+        <activity
+            android:name=".ActivityChangeScheduler"
             android:screenOrientation="portrait" />
-        <activity android:name=".FeatureExtraction.Speech.SpeechFeatures_Activities.ArtFeatures_Activity"
+        <activity
+            android:name=".FeatureExtraction.Tapping.Tapping_feature_Activity"
             android:screenOrientation="portrait" />
-        <activity android:name=".FeatureExtraction.Speech.SpeechFeatures_Activities.PhonFeatures_Activity"
+        <activity
+            android:name=".FeatureExtraction.Movement.PosturalTremor_feature_Activity"
             android:screenOrientation="portrait" />
-        <activity android:name=".FeatureExtraction.Speech.SpeechFeatures_Activities.ProsFeatures_Activity"
+        <activity
+            android:name=".FeatureExtraction.Movement.BalanceTremorFeatureActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FeatureExtraction.Movement.WalkingFeatureActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FeatureExtraction.Movement.HandMovementFeatureActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FeatureExtraction.Speech.Speech_features_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FeatureExtraction.Speech.SpeechFeatures_Activities.ArtFeatures_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FeatureExtraction.Speech.SpeechFeatures_Activities.PhonFeatures_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FeatureExtraction.Speech.SpeechFeatures_Activities.ProsFeatures_Activity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".FeatureExtraction.Speech.SpeechFeatures_Activities.RadarSpeech_Activity"
             android:screenOrientation="portrait" />
 
         <!-- Register the Alarm Receiver -->
@@ -86,7 +100,6 @@
             </intent-filter>
         </receiver>
         <receiver android:name=".AlarmReceiverMedicine"
-
             android:enabled="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

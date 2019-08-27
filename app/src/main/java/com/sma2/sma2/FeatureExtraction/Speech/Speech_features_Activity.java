@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.sma2.sma2.FeatureExtraction.Speech.SpeechFeatures_Activities.ArtFeatures_Activity;
 import com.sma2.sma2.FeatureExtraction.Speech.SpeechFeatures_Activities.PhonFeatures_Activity;
 import com.sma2.sma2.FeatureExtraction.Speech.SpeechFeatures_Activities.ProsFeatures_Activity;
+import com.sma2.sma2.FeatureExtraction.Speech.SpeechFeatures_Activities.RadarSpeech_Activity;
 import com.sma2.sma2.MainActivityMenu;
 import com.sma2.sma2.R;
 
@@ -21,13 +22,15 @@ import java.util.List;
 
 public class Speech_features_Activity extends AppCompatActivity implements View.OnClickListener {
     private ImageButton  bProsFt, bPhonFt, bArtFt;
-    private Button bBack;
+    private Button bBack, bRadar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_speech_features);
+
         bBack = findViewById(R.id.button_back_speech);
+        bRadar = findViewById(R.id.button_radar_speech);
         bProsFt = findViewById(R.id.button_ProsFt);
         bPhonFt = findViewById(R.id.button_PhonFt);
         bArtFt = findViewById(R.id.button_ArtFt);
@@ -41,6 +44,7 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
 
     private void SetListeners() {
         bBack.setOnClickListener(this);
+        bRadar.setOnClickListener(this);
         bProsFt.setOnClickListener(this);
         bPhonFt.setOnClickListener(this);
         bArtFt.setOnClickListener(this);
@@ -57,6 +61,9 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
             case R.id.button_back_speech:
                 onButtonBack();
                 break;
+            case R.id.button_radar_speech:
+                onButtonRadar();
+                break;
             case R.id.button_ProsFt:
                 onButtonProsFT();
                 break;
@@ -72,6 +79,12 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
 
     private void onButtonBack() {
         Intent i = new Intent(Speech_features_Activity.this, MainActivityMenu.class);
+        startActivity(i);
+
+    }
+
+    private void onButtonRadar() {
+        Intent i = new Intent(Speech_features_Activity.this, RadarSpeech_Activity.class);
         startActivity(i);
 
     }
