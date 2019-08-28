@@ -103,7 +103,23 @@ public class ArtFeatures_Activity extends AppCompatActivity implements View.OnCl
                 Duration.add(((float) segment.length * 1000) / InfoSig[0]);
             }
 
-            return PhonFeatures.calculateSD(Duration);
+
+            float DKR=PhonFeatures.calculateSD(Duration);
+
+            // DDKRegularity healthy control ranges: 0 to 313 ms (SD)
+            // A good answer from the task is when is less than 313
+
+
+
+            if (DKR <= 200) {
+
+                DKR = 0;
+            } else {
+                DKR = (100 * (DKR-200)) / 200;
+            }
+
+
+            return 100-DKR;
         }
 
     }
@@ -137,13 +153,13 @@ public class ArtFeatures_Activity extends AppCompatActivity implements View.OnCl
             tddk_reg.setText(R.string.Empty);
         } else {
             DDK_reg = DDKRegularity(path_pataka);
-            String DDK_regStr = String.valueOf(df.format(DDK_reg)) + "ms";
+            String DDK_regStr = String.valueOf(df.format(DDK_reg)) + "%";
             tddk_reg.setText(DDK_regStr);
         }
 
         // Emoji for articulation features
 
-        if (DDK_reg <= 200) {
+        if (DDK_reg >= 75) {
             iEmojinArticulation.setImageResource(R.drawable.happy_emojin);
 
             Animation animation = AnimationUtils.loadAnimation(this, R.anim.zoomin);
@@ -151,7 +167,7 @@ public class ArtFeatures_Activity extends AppCompatActivity implements View.OnCl
             tmessage_articulation.setText(R.string.Positive_message);
             Animation animation2 = AnimationUtils.loadAnimation(this, R.anim.bounce);
             tmessage_articulation.startAnimation(animation2);
-        } else if (DDK_reg <= 400) {
+        } else if (DDK_reg >= 50) {
             iEmojinArticulation.setImageResource(R.drawable.medium_emojin);
 
             Animation animation = AnimationUtils.loadAnimation(this, R.anim.zoomin);

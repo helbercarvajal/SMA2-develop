@@ -61,10 +61,10 @@ public class RadarSpeech_Activity extends AppCompatActivity implements View.OnCl
 
         float shimmer = Shimmer();
         float jitter = Jitter();
-        //Regularidad DDK pendiente <---------
+        float ddkRegularity=DDKRegularity();
         float voicerate = VoiceRate();
 
-        float[] datos1={(100f-shimmer),(100f-jitter),50,voicerate}; // datos que se van a graficar
+        float[] datos1={(100f-shimmer),(100f-jitter),ddkRegularity,voicerate}; // data to graph
         float[] datos2={10f,10f,10f,10f};
 
         RadarData radardata=setdata(datos1,datos2);
@@ -237,9 +237,73 @@ public class RadarSpeech_Activity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    //________________________________________________________
-    //PENDIENTE ACA REGULARIDAD DDK EN PORCENTAEJE
-    //________________________________________________________
+    private float DDKRegularity() {
+        // get exercises from sustained vowel ah to compute phonation features
+        SignalDataService signalDataService = new SignalDataService(this);
+        DecimalFormat df = new DecimalFormat("#.00");
+        GetExercises GetEx = new GetExercises(this);
+
+        //VOICE RATE PART
+        // get exercises from DDK: PATAKA to compute prosody features
+        int IDEx = 11;
+        String pataka = GetEx.getNameExercise(IDEx);
+        long N_pataka = signalDataService.countSignalsbyname(pataka);
+
+        if (N_pataka > 0) {
+            List<SignalDA> signals = signalDataService.getSignalsbyname(pataka);
+            if (signals.size() > 0) {
+                path_pataka = signals.get(signals.size() - 1).getSignalPath();
+            }
+        }
+
+        if (path_pataka == null)
+            return 0;
+        else {
+
+            WAVfileReader wavFileReader = new WAVfileReader();
+            f0detector F0Detector = new f0detector();
+            PhonFeatures PhonFeatures = new PhonFeatures();
+
+            int[] InfoSig = wavFileReader.getdatainfo(path_pataka);
+            float[] Signal = wavFileReader.readWAV(InfoSig[0]);
+            sigproc SigProc = new sigproc();
+            Signal = SigProc.normsig(Signal);
+            float[] F0 = F0Detector.sig_f0(Signal, InfoSig[1]);
+            float sumF0 = 0;
+            for (int i = 0; i < F0.length; i++) {
+                sumF0 += F0[i];
+            }
+            if (sumF0 == 0) {
+                return 0;
+            } else {
+                List<float[]> Voiced = F0Detector.voiced(F0, Signal);
+
+                List<Float> Duration = new ArrayList<>();
+                float[] segment;
+                for (int i = 0; i < Voiced.size(); i++) {
+                    segment = Voiced.get(i);
+                    Duration.add(((float) segment.length * 1000) / InfoSig[0]);
+                }
+
+
+                float DKR = PhonFeatures.calculateSD(Duration);
+
+                // DDKRegularity healthy control ranges: 0 to 313 ms (SD)
+                // A good answer from the task is when is less than 313
+
+
+                if (DKR <= 200) {
+
+                    DKR = 0;
+                } else {
+                    DKR = (100 * (DKR - 200)) / 200;
+                }
+
+
+                return 100 - DKR;
+            }
+        }
+    }
 
     private float VoiceRate() {
         // get exercises from sustained vowel ah to compute phonation features
