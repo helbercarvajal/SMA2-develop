@@ -12,6 +12,7 @@ import static java.util.Arrays.copyOfRange;
 /**
  * Created by TOMAS on 26/03/2017.
  * * * Modified on 08/10/2018  for SMA2 - Paula Pérez
+ * * * * Modified on 20/08/2019  for SMA2 - Cristian Rios
  */
 
 public class f0detector {
@@ -57,7 +58,6 @@ public class f0detector {
         //float[] pitchC = f0_cristian(sig);
 
 
-        //Log.e("F0", "Listo");
 
         //Fix contour.
         pitchC = fixf0(pitchC);
@@ -631,28 +631,33 @@ public class f0detector {
             int ind = (int) pitchON.get(i);
             f0ON[i] =  ind;
         }
+
+
         //Initial position of segment
-        int iniV = (int) pitchON.get(0)*step+step;
-        //Detect segments
-        float[] df0 = ArrM.diff(f0ON);
-        List sizeV = ArrM.find(df0,1,2);
-        for(int i=0;i<sizeV.size();i++)
-        {
-            //int indx = sizV[i];
-            int indx = (int) sizeV.get(i);
-            int finV = (int) (pitchON.get(indx))*step+step;
+        if (pitchON.size()==0){}
+
+        else{
+            int iniV = (int) pitchON.get(0)*step+step;
+            //Detect segments
+            float[] df0 = ArrM.diff(f0ON);
+            List sizeV = ArrM.find(df0,1,2);
+            for(int i=0;i<sizeV.size();i++)
+            {
+                //int indx = sizV[i];
+                int indx = (int) sizeV.get(i);
+                int finV = (int) (pitchON.get(indx))*step+step;
+                float[] seg = copyOfRange(sigN,iniV,finV);
+                iniV = (int) pitchON.get(indx+1)*step+step;
+                //  if (seg.length>=minseg) {
+                VoicedSeg.add(seg);
+                //}
+            }
+            //Append last segment
+            int temp = pitchON.size();
+            int finV = (int) pitchON.get(temp-1)*step+step;
             float[] seg = copyOfRange(sigN,iniV,finV);
-            iniV = (int) pitchON.get(indx+1)*step+step;
-            //  if (seg.length>=minseg) {
-            VoicedSeg.add(seg);
-            //}
-        }
-        //Append last segment
-        int temp = pitchON.size();
-        int finV = (int) pitchON.get(temp-1)*step+step;
-        float[] seg = copyOfRange(sigN,iniV,finV);
-        //if (seg.length>=minseg) {
-        VoicedSeg.add(seg);
+            //if (seg.length>=minseg) {
+            VoicedSeg.add(seg);}
         //}
         return VoicedSeg;
     }

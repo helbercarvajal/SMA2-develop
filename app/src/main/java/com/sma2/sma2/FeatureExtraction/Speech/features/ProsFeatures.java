@@ -34,8 +34,8 @@ public class ProsFeatures {
         double mean= calculateMean(F0);
 
 
-            return calculateSD(F0,mean);
-        }
+        return calculateSD(F0,mean);
+    }
 
 
     public float voiceRate(String AudioFile) {
@@ -49,8 +49,11 @@ public class ProsFeatures {
         Signal = SigProc.normsig(Signal);
         float[] F0= F0Detector.sig_f0(Signal, InfoSig[1]);
         List VoicedSeg = F0Detector.voiced(F0, Signal);
-
-        float vRate=InfoSig[1]*VoicedSeg.size()/datalen;
+        float vRate=0;
+        if(VoicedSeg.size()==0){
+            vRate=0;}
+        else{
+            vRate=InfoSig[1]*VoicedSeg.size()/datalen;}
 
         return vRate;
     }
