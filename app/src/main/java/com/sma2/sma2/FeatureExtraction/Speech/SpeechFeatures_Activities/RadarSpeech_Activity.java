@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -42,6 +43,8 @@ public class RadarSpeech_Activity extends AppCompatActivity implements View.OnCl
 
     private Button bBack;
     private String path_ah = null, path_pataka = null;
+    private List<String> path_pataka_all = new ArrayList<>(), path_pakata_all = new ArrayList<>(), path_petaka_all = new ArrayList<>();
+    private List<Float> vRatePer = new ArrayList<>();
 
 
     @Override
@@ -64,8 +67,11 @@ public class RadarSpeech_Activity extends AppCompatActivity implements View.OnCl
         float ddkRegularity=DDKRegularity();
         float voicerate = VoiceRate();
 
+
+
+
         float[] datos1={(100f-shimmer),(100f-jitter),ddkRegularity,voicerate}; // data to graph
-        float[] datos2={10f,10f,10f,10f};
+        float[] datos2={(float) 96.405,(float) 84.695,(float) 94.28,(float) 51.04};
 
         RadarData radardata=setdata(datos1,datos2);
         String[] labels={"Volumen","Monotonicidad", "Reg. Articulacion", "Vel. Articulatoria"};
@@ -339,5 +345,8 @@ public class RadarSpeech_Activity extends AppCompatActivity implements View.OnCl
             return vRate;
         }
     }
+
+
+
 
 }
