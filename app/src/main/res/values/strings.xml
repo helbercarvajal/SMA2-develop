@@ -160,7 +160,8 @@
     <string name="full_exercises">Full Exercises</string>
     <string name="wrong_pass">Wrong password</string>
     <string name="gaitGyroscope">Gait signal - Gyroscope</string>
-    <string name="gaitAccelerometer">Gait signal - Accelerometer</string>
+    <string name="gaitAccelerometerX">Gait signal - accX</string>
+    <string name="gaitAccelerometerY">Gait signal - accY</string>
     <string name="voiceRateDDK1">Voice Rate Pataka (%)</string>
     <string name="voiceRateDDK2">Voice Rate Pakata (%)</string>
     <string name="voiceRateDDK3">Voice Rate Petaka (%)</string>

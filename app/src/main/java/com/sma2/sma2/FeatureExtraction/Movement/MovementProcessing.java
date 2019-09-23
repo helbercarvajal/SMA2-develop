@@ -56,19 +56,18 @@ public class MovementProcessing {
 
 
     public List<Double> getAccR(List<Double> accX, List<Double> accY, List<Double> accZ){
-        List<Double> accR=new ArrayList<>();
+        List<Double> accR = new ArrayList<>();
         double accxi, accyi, acczi;
         for (int j = 0;j < accX.size(); j++){
             accxi = Math.pow(accX.get(j),2);
             accyi = Math.pow(accY.get(j),2);
             acczi = Math.pow(accZ.get(j),2);
-            accR.add(Math.sqrt(accxi+accyi+acczi));
+            accR.add(Math.sqrt(accxi + accyi + acczi));
         }
         return accR;
     }
 
     public Double ComputeTremor(List<Double> AccX, List<Double> AccY, List<Double> AccZ){
-
 
         List<Double> AccXn, AccYn, AccZn, AccR;
 
@@ -87,11 +86,11 @@ public class MovementProcessing {
 
         inilag = (int) Math.ceil(fs/maxf0);//lower bound lag
         endlag  = (int) Math.ceil(fs/minf0);//upper bound lag
-        AccXn=RemoveGravity(AccX);
-        AccYn=RemoveGravity(AccY);
-        AccZn=RemoveGravity(AccZ);
+        AccXn = RemoveGravity(AccX);
+        AccYn = RemoveGravity(AccY);
+        AccZn = RemoveGravity(AccZ);
 
-        AccR=getAccR(AccXn, AccYn, AccZn);
+        AccR = getAccR(AccXn, AccYn, AccZn);
 
         //This function normalize the speech signal.
 
@@ -110,7 +109,6 @@ public class MovementProcessing {
         //Interpolate missing values
         pitchC = interpf0(pitchC);
 
-
         //Voiced
         //List VoicedSeg = voiced(pitchC,sig, (int) (winstep*fs));
 
@@ -121,8 +119,6 @@ public class MovementProcessing {
 
     //F0 contour
     private float[] f0_cont(List<Double> signal, int fs) {
-
-
 
         double[] signal2=arrays.dlisttoarray(signal);
         //Find global absolute peak
@@ -266,7 +262,6 @@ public class MovementProcessing {
     }
 
 
-
     //Set f0 to zero in frames with a length less than the analysis window
     private float[] zerof0(float[] cont) {
         boolean initzero = false;
@@ -327,7 +322,6 @@ public class MovementProcessing {
         return  cont;
     }
 
-
     public float perc_stab_freq(float[] f0) {
         //Ensure nonzero values in f0 contour
         List lf0 = arrays.find(f0,0f,2);
@@ -364,5 +358,151 @@ public class MovementProcessing {
         return avgjitt/nf;
     }
 
+
+    // Funciones de Reinel
+    public List<Double> simpleIntegral(List<Double> signal){
+        double Io=0.0;
+        List<Double> SignalOut=new ArrayList<>();
+        for(int j=0;j<signal.size()-1;j++){
+            Io=0.5*(signal.get(j)+signal.get(j+1))+Io;
+            SignalOut.add(Io);
+        }
+        return SignalOut;
+    }
+
+    public List<Double> removeTrends(List<Double> signal){
+        List<Double> SignalOut=new ArrayList<>();
+        double aux;
+        double[] a=new double[2];
+        double[] x=new double[signal.size()];
+        double[] y=new double[signal.size()];
+        for (int j=0;j<signal.size();j++) {
+            x[j]=j;
+            y[j]=signal.get(j);
+        }
+        a=LinearRegression(x,y);
+        for(int i=0; i<signal.size();i++) {
+            aux=signal.get(i)-a[0]-a[1]*i;
+            SignalOut.add(aux);
+        }
+        return SignalOut;
+    }
+
+    public List<Double> medianfilt1d(List<Double>signal1d, int N){
+        float[] signal = new float[signal1d.size()];
+        for(int k=0;k<signal1d.size();k++) {
+            signal[k]=signal1d.get(k).floatValue();
+        }
+
+        int M=(int)(Math.floor(N/2));
+        int beg, end;
+        float[] temp;
+        List<Double> SignalOut=new ArrayList<>();
+        for(int j=0;j<signal.length-1;j++){
+            if (j<N || j>signal.length-N) {
+                SignalOut.add((double)signal[j]);
+            }
+            else {
+                beg=j-M;
+                end=j+M+1;
+                temp = Arrays.copyOfRange(signal,beg,end);
+                Arrays.sort(temp);
+                SignalOut.add((double)(temp[M]));
+            }
+        }
+        return SignalOut;
+    }
+
+    public double[] LinearRegression(double[] x, double[] y) {
+        double slope, intercept;
+        int n = x.length;
+        double[] a=new double[2];
+        // first pass
+        double sumx = 0.0, sumy = 0.0, sumx2 = 0.0;
+        for (int i = 0; i < n; i++) {
+            sumx += x[i];
+            sumx2 += x[i] * x[i];
+            sumy += y[i];
+        }
+        double xbar = sumx/n;
+        double ybar = sumy/n;
+
+        // second pass: compute summary statistics
+        double xxbar = 0.0, yybar = 0.0, xybar = 0.0;
+        for (int i = 0; i < n; i++) {
+            xxbar += (x[i] - xbar) * (x[i] - xbar);
+            yybar += (y[i] - ybar) * (y[i] - ybar);
+            xybar += (x[i] - xbar) * (y[i] - ybar);
+        }
+        slope = xybar/xxbar;
+        intercept = ybar - slope * xbar;
+        a[0]=intercept;
+        a[1]=slope;
+        return a;
+    }
+
+    // Funcion para calcular el temblor en movimienoto, inicialmente se suavisa la senal
+    public double TremorMov(List<Double> AccX, List<Double> AccY, List<Double> AccZ){
+        List<Double> AccXn, AccYn, AccZn, AccR, AccFilter;
+        List<Double> AccNoise=new ArrayList<>();
+        double aux = 0.0;
+
+        AccXn=RemoveGravity(AccX);
+        AccYn=RemoveGravity(AccY);
+        AccZn=RemoveGravity(AccZ);
+
+        AccR=getAccR(AccXn, AccYn, AccZn);
+        AccFilter=medianfilt1d(AccR,50);
+        for(int k = 0; k < AccFilter.size(); k++) {
+            aux=AccR.get(k) - AccFilter.get(k);
+            AccNoise.add(aux);
+        }
+        return 100/(1+ComputePower(AccNoise));
+    }
+
+    public double stabVelocity(List<Double> AccX, List<Double> AccY, List<Double> AccZ){
+        List<Double> AccXn, AccYn, AccZn, AccR, VelR_aux, VelR;
+
+        AccXn = RemoveGravity(AccX);
+        AccYn = RemoveGravity(AccY);
+        AccZn = RemoveGravity(AccZ);
+
+        AccR = getAccR(AccXn, AccYn, AccZn);
+        VelR_aux = simpleIntegral(AccR);
+        VelR = removeTrends(VelR_aux);
+
+        return Math.sqrt(ComputePower(VelR));
+    }
+
+    // Conversion de ArrayList<Double> to ArrayList<Float>
+    public ArrayList<Float> getAccX(List<Double> signal){
+        List<Double> AccXn;
+        AccXn = RemoveGravity(signal);
+        ArrayList<Float> SignalOut = new ArrayList<>();
+        for (int j = 600; j < signal.size(); j++){
+            SignalOut.add(AccXn.get(j).floatValue());
+        }
+        return SignalOut;
+    }
+
+    public ArrayList<Float> getTime(List<Float> signal){
+        ArrayList<Float> SignalOut = new ArrayList<>();
+        float temp = 0.0f;
+        for (float j = 0; j < signal.size(); j++){
+            temp = j/100;
+            SignalOut.add(temp);
+        }
+        return SignalOut;
+    }
+
+    // Design the code to count steps
+    public double getSteps(List<Float> signal){
+        return ((double)signal.size())/100;
+    }
+
+    // Design the code to calculate velocity
+    public double velocity(List<Float> signal){
+        return ((double)signal.size())/100;
+    }
 
 }
