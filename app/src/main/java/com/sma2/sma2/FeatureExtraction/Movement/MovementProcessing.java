@@ -477,7 +477,9 @@ public class MovementProcessing {
 
         return 100/(1+Math.sqrt(ComputePower(VelR)));
     }
-
+    // The following function are for test only. It is necessary to
+    // calculate the features
+    
     // Conversion de ArrayList<Double> to ArrayList<Float>
     public ArrayList<Float> getAccX(List<Double> signal){
         List<Double> AccXn;
