@@ -243,6 +243,7 @@ public class RadarSpeech_Activity extends AppCompatActivity implements View.OnCl
         }
     }
 
+    
     private float DDKRegularity() {
         // get exercises from sustained vowel ah to compute phonation features
         SignalDataService signalDataService = new SignalDataService(this);
