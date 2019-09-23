@@ -174,5 +174,7 @@
     <string name="stability"> Stability</string>
     <string name="TremorLeft">% Left Hand</string>
     <string name="TremorRight">% Right Hand</string>
+    <string name="gaitAccelerometerX">Acceleration X</string>
+    <string name="gaitAccelerometerY">Acceleration Y</string>
 
 </resources>
