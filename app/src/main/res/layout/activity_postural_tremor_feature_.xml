@@ -217,12 +217,24 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Ver Diagrama Radar"
+            android:layout_marginTop="35sp"
+            android:textSize="@dimen/button_text_size"
+            android:background="@color/colorPrimaryDark"
+            android:id="@+id/button_radarchart"
+            app:layout_constraintTop_toBottomOf="@+id/bar_percTremorRight"
+
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="@string/back"
             android:layout_marginTop="35sp"
             android:textSize="@dimen/button_text_size"
             android:background="@color/colorPrimaryDark"
             android:id="@+id/button_back5"
-            app:layout_constraintTop_toBottomOf="@+id/bar_percTremorRight"
+            app:layout_constraintTop_toBottomOf="@+id/button_radarchart"
 
             />
     </android.support.constraint.ConstraintLayout>

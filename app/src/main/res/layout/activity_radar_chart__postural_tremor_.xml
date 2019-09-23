@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:layout_gravity="center"
+    >
+
+
+
+
+    <android.support.constraint.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        tools:context="com.sma2.sma2.MainActivity">
+
+        <TextView
+            android:id="@+id/textView_radarchart_Left"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:gravity="center"
+            android:text="@string/Hand_left"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.github.mikephil.charting.charts.RadarChart
+            android:id="@+id/radar_chart1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textSize="@dimen/button_text_size"
+            app:layout_constraintWidth_percent="1"
+            app:layout_constraintDimensionRatio="0.7"
+            app:seriesType="radarchart"
+            android:layout_marginTop="30sp"
+            app:seriesColor="@color/colorPrimaryDark"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_radarchart_Left"
+            />
+
+
+        <TextView
+            android:id="@+id/textView_radarchart_Right"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:gravity="center"
+            android:text="@string/Hand_right"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radar_chart1"
+            />
+
+
+        <com.github.mikephil.charting.charts.RadarChart
+            android:id="@+id/radar_chart2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textSize="@dimen/button_text_size"
+            app:layout_constraintWidth_percent="1"
+            app:layout_constraintDimensionRatio="0.7"
+            app:seriesType="radarchart"
+            android:layout_marginTop="30sp"
+            app:seriesColor="@color/colorPrimaryDark"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_radarchart_Right"
+            />
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/back"
+            android:layout_marginTop="35sp"
+            android:textSize="@dimen/button_text_size"
+            android:background="@color/colorPrimaryDark"
+            android:id="@+id/button_back_radarchart"
+            app:layout_constraintTop_toBottomOf="@+id/radar_chart2"
+
+            />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>

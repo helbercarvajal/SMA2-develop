@@ -32,7 +32,7 @@ import java.util.Locale;
 public class PosturalTremor_feature_Activity extends AppCompatActivity implements View.OnClickListener {
 
 
-    Button bBack;
+    Button bBack,bRadarchart;
     private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/MOVEMENT/";
     String path_movementRight = null, path_movementLeft = null;
     List<String> path_movement_all_right= new ArrayList<String>(), path_movement_all_left= new ArrayList<String>();
@@ -48,9 +48,12 @@ public class PosturalTremor_feature_Activity extends AppCompatActivity implement
         MovementProcessing MovementProcessor=new MovementProcessing();
         DecimalFormat df = new DecimalFormat("#.0");
 
-
         bBack=findViewById(R.id.button_back5);
         bBack.setOnClickListener(this);
+
+        bRadarchart=findViewById(R.id.button_radarchart);
+        bRadarchart.setOnClickListener(this);
+
         tTremor_left=findViewById(R.id.tTremor_left);
         tTremor_right=findViewById(R.id.tTremor_right);
         tF0_left=findViewById(R.id.tF0_left);
@@ -352,6 +355,9 @@ public class PosturalTremor_feature_Activity extends AppCompatActivity implement
             case R.id.button_back5:
                 onButtonBack();
                 break;
+            case R.id.button_radarchart:
+                onButtonRadarChar();
+                break;
         }
     }
 
@@ -361,4 +367,9 @@ public class PosturalTremor_feature_Activity extends AppCompatActivity implement
 
     }
 
+    private void onButtonRadarChar(){
+        Intent i =new Intent(PosturalTremor_feature_Activity.this, RadarChart_PosturalTremor_Activity.class);
+        startActivity(i);
+
+    }
 }
