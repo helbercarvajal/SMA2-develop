@@ -478,6 +478,38 @@ public class MovementProcessing {
         return 100/(1+Math.sqrt(ComputePower(VelR)));
     }
 
+    // Conversion de ArrayList<Double> to ArrayList<Float>
+    public ArrayList<Float> getAccX(List<Double> signal){
+        List<Double> AccXn;
+        AccXn = RemoveGravity(signal);
+        ArrayList<Float> SignalOut = new ArrayList<>();
+        for (int j = 600; j < signal.size(); j++){
+            SignalOut.add(AccXn.get(j).floatValue());
+        }
+        return SignalOut;
+    }
+
+    public ArrayList<Float> getTime(List<Float> signal){
+        ArrayList<Float> SignalOut = new ArrayList<>();
+        float temp = 0.0f;
+        for (float j = 0; j < signal.size(); j++){
+            temp = j/100;
+            SignalOut.add(temp);
+        }
+        return SignalOut;
+    }
+
+    // Design the code to count steps
+    public double getSteps(List<Float> signal){
+        return ((double)signal.size())/100;
+    }
+
+    // Design the code to calculate velocity
+    public double velocity(List<Float> signal){
+        return ((double)signal.size())/100;
+    }
+
+
     //----------------------------------------------------------------------------------------------
 
 
