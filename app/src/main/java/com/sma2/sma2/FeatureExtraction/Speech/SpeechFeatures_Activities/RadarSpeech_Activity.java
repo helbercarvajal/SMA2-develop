@@ -69,7 +69,6 @@ public class RadarSpeech_Activity extends AppCompatActivity implements View.OnCl
 
 
 
-
         float[] datos1={(100f-shimmer),(100f-jitter),ddkRegularity,voicerate}; // data to graph
         float[] datos2={(float) 96.405,(float) 84.695,(float) 94.28,(float) 51.04};
 
