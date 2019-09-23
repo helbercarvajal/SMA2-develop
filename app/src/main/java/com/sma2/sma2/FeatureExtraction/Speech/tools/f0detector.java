@@ -5,6 +5,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static java.util.Arrays.copyOfRange;
@@ -166,6 +167,8 @@ public class f0detector {
 
         float[] f0c = new float[numberOfframes];
 
+
+        float f0_aux=0;
         for (int i = 0; i < numberOfframes; i++) {
             sig_frame = copyOfRange(signal, ini_frame, end_frame);
             //Voiceless candidate
@@ -183,7 +186,11 @@ public class f0detector {
                 f0c[i] = 0;
             } else {
                 //Estimate pitch for each speech segment
-                f0c[i] = autoCorrelate(sig_frame, 16000);
+                f0_aux = autoCorrelate(sig_frame, 16000);
+                if(f0_aux > maxf0 || f0_aux < minf0)
+                    f0c[i] = 0;
+                else
+                    f0c[i] = f0_aux;
             }
             ini_frame = ini_frame + windowshift;
             end_frame = end_frame + windowshift;
@@ -222,7 +229,13 @@ public class f0detector {
             for (int j = 0; j < SIZE - i; j++)
                 c[i] = c[i] + buf_aux[j] * buf_aux[j + i];
 
-        int d = 0; while (c[d] > c[d + 1]) d++;
+        int d=0;
+        for (int i = 1; i < (c.length-1); i++)
+            if (c[i-1] > c[i])
+                d++;
+            else
+                break;
+
         float maxval = -1;
         int maxpos = -1;
         for (int i = d; i < SIZE; i++) {
